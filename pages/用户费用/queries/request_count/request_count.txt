@@ -1,0 +1,1 @@
+SELECT "display_name" AS "x","request_count" AS "y" FROM public."users" ORDER BY "request_count" DESC LIMIT 20;

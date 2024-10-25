@@ -1,0 +1,20 @@
+select
+    app_id,
+    a.name as appName,
+     t.name as WorkspaceName,
+	count(distinct m.from_end_user_id) as terminal_count
+from
+	messages m
+JOIN 
+    apps a
+ON 
+    m.app_id = a.id	
+JOIN 
+    tenants t 
+ON 
+    a.tenant_id = t.id     
+group by
+	t.name,app_id,a.name
+order by
+	terminal_count DESC
+LIMIT 20;	

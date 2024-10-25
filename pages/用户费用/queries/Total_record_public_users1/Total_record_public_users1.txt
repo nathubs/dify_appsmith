@@ -1,0 +1,1 @@
+SELECT COUNT(*) from public.users where username ilike '%{{Table1.searchText}}%';

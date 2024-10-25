@@ -1,0 +1,17 @@
+WITH data as (
+SELECT
+  l.*,u.display_name AS display_name
+FROM
+  public.logs l
+JOIN
+ users u
+ON
+ u.id=l.user_id
+WHERE
+  "display_name" ilike '%{{Table1.selectedRow.display_name}}%'
+)
+SELECT
+	COUNT(*) 
+FROM
+	data
+

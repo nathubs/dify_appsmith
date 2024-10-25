@@ -1,0 +1,9 @@
+SELECT   
+    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as total_token,
+    sum(l.quota/500000.0) as total_price
+FROM 
+    public.logs l
+WHERE 
+    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}
+ORDER BY 
+    total_token desc; 

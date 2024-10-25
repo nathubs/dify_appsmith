@@ -1,0 +1,1 @@
+SELECT * FROM public."account_integrates" LIMIT 10;

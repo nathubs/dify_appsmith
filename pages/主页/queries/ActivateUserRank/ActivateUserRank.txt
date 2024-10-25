@@ -1,0 +1,24 @@
+select
+        m.app_id,
+        a.name as appName,
+        t.name as WorkspaceName,
+        count(distinct m.from_end_user_id) as terminal_count
+from
+     public.messages m
+join 
+    public.apps a
+on
+   m.app_id = a.id
+join 
+    public.tenants t 
+on
+        a.tenant_id = t.id
+where
+        m.created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+group by
+        t.name,
+        m.app_id,
+        a.name
+order by
+        terminal_count desc
+limit 20;				

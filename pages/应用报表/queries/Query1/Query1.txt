@@ -1,0 +1,27 @@
+select
+	app_id,
+	a.name as appName,
+	t.name as WorkspaceName,
+	(sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,
+    sum(m.total_price) as total_price,
+from
+	messages m
+join 
+    apps a
+on
+	m.app_id = a.id
+join 
+    tenants t 
+on
+	a.tenant_id = t.id
+where
+	m.created_at >= '2024-08-08'
+	and m.created_at < '2024-09-10'
+group by
+	t.name,
+	app_id,
+	a.name
+order by
+	message_count desc
+LIMIT 20;	
+	

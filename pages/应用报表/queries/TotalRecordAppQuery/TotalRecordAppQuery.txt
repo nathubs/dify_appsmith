@@ -1,0 +1,28 @@
+WITH data AS (
+    SELECT
+        m.app_id, 
+        t.name as WorkspaceName,
+        a.name as APPName,
+        (sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,
+        sum(m.total_price) as total_price,
+        count(*) as message_count,
+        count(distinct m.from_end_user_id) as terminal_count
+    FROM 
+        messages m	
+    JOIN 
+        apps a
+    ON 
+        m.app_id = a.id
+    JOIN 
+        tenants t 
+    ON 
+        a.tenant_id = t.id 
+    WHERE
+      a.name ilike '%{{Table1.searchText}}%'			
+    GROUP BY 
+        t.name,m.app_id, a.name
+)
+SELECT 
+    COUNT(*)
+FROM 
+    data

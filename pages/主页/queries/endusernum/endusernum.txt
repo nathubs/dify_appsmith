@@ -1,0 +1,5 @@
+select
+        count(distinct m.from_end_user_id) as enduserCount
+from
+        public.messages m
+where created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'

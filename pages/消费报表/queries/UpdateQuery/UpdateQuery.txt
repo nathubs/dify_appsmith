@@ -1,0 +1,13 @@
+UPDATE public."logs" SET
+		"content" = '{{update_form.fieldState.content.isVisible ? update_form.formData.content : update_form.sourceData.content}}',
+		"user_id" = '{{update_form.fieldState.user_id.isVisible ? update_form.formData.user_id : update_form.sourceData.user_id}}',
+    "created_at" = '{{update_form.fieldState.created_at.isVisible ? update_form.formData.created_at : update_form.sourceData.created_at}}',
+		"type" = '{{update_form.fieldState.type.isVisible ? update_form.formData.type : update_form.sourceData.type}}',
+		"username" = '{{update_form.fieldState.username.isVisible ? update_form.formData.username : update_form.sourceData.username}}',
+		"token_name" = '{{update_form.fieldState.token_name.isVisible ? update_form.formData.token_name : update_form.sourceData.token_name}}',
+		"model_name" = '{{update_form.fieldState.model_name.isVisible ? update_form.formData.model_name : update_form.sourceData.model_name}}',
+		"quota" = '{{update_form.fieldState.quota.isVisible ? update_form.formData.quota : update_form.sourceData.quota}}',
+		"prompt_tokens" = '{{update_form.fieldState.prompt_tokens.isVisible ? update_form.formData.prompt_tokens : update_form.sourceData.prompt_tokens}}',
+		"completion_tokens" = '{{update_form.fieldState.completion_tokens.isVisible ? update_form.formData.completion_tokens : update_form.sourceData.completion_tokens}}',
+		"channel_id" = '{{update_form.fieldState.channel_id.isVisible ? update_form.formData.channel_id : update_form.sourceData.channel_id}}'
+	WHERE "id" = {{data_table.selectedRow.id}};

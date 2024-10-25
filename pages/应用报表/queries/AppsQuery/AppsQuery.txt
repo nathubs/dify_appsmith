@@ -1,0 +1,26 @@
+SELECT     
+    m.app_id, 
+    t.name as WorkspaceName,
+    a.name as APPName,
+    (sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,
+    sum(m.total_price) as total_price,
+		count(*) as message_count,
+		count(distinct m.from_end_user_id) as terminal_count
+FROM 
+    messages m
+JOIN 
+    apps a
+ON 
+    m.app_id = a.id
+JOIN 
+    tenants t 
+ON 
+    a.tenant_id = t.id    
+
+GROUP BY 
+    t.name,m.app_id, a.name 
+ORDER BY     
+    {{(appsmith.store.tabName=='消息数'?'message_count':(appsmith.store.tabName=='活跃用户'?'terminal_count':'token_count'))||'token_count'}} desc
+LIMIT 30	
+	
+		

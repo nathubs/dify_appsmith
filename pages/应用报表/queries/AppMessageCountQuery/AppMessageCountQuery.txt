@@ -1,0 +1,23 @@
+select
+	app_id,
+	a.name as appName,
+	t.name as WorkspaceName,
+	count(*) as message_count
+from
+	messages m
+join 
+    apps a
+on
+	m.app_id = a.id
+join 
+    tenants t 
+on
+	a.tenant_id = t.id
+group by
+	t.name,
+	app_id,
+	a.name
+order by
+	message_count desc
+LIMIT 20;	
+	

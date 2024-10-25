@@ -1,0 +1,19 @@
+SELECT     
+    l.user_id,
+    u.display_name,
+    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as token_count,
+    sum(l.quota/500000.0) as total_price
+FROM 
+    logs l
+JOIN
+   users u
+ON
+  u.id = l.user_id
+WHERE 
+    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}
+GROUP BY 
+    l.user_id, u.display_name
+ORDER BY 
+    token_count desc
+LIMIT 10		
+		

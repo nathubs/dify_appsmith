@@ -1,0 +1,27 @@
+SELECT 
+    dtt.tenant_id, 
+    dtt.token, 
+    t.name as WorkNamespace,
+    u.username ,
+    u.display_name ,
+    sum(t.remain_quota) as qutoa,
+    sum(t.used_quota)/500000.0 as used_quota 
+FROM 
+    dify_tenant_tokens dtt
+JOIN 
+    tokens t 
+ON 
+    dtt.token = t.key 
+join
+    users u 
+on
+    t.user_id = u.id 
+GROUP BY 
+    dtt.tenant_id, 
+    dtt.token, 
+    t.name,
+    u.username,
+    u.display_name
+order by
+   used_quota desc
+   

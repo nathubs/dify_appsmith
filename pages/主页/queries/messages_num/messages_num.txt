@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM public."messages" where created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}';

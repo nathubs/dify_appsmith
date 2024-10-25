@@ -1,0 +1,51 @@
+SELECT
+m.app_id,
+t.name as WorkspaceName,
+a.name as APPName,
+'chat' as type,
+(sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,
+sum(m.total_price) as total_price,
+count(*) as message_count
+FROM
+messages m
+JOIN
+apps a
+ON
+m.app_id = a.id
+JOIN
+tenants t
+ON
+a.tenant_id = t.id
+WHERE
+a.name ilike '%{{Table1.searchText}}%'
+GROUP BY
+t.name,m.app_id, a.name
+UNION ALL
+SELECT
+m.app_id,
+t.name as WorkspaceName,
+a.name as APPName,
+'workflow' as type,
+sum(m.total_tokens) as token_count,
+sum(m.total_tokens) as total_price,
+count(m.id) as message_count
+FROM
+workflow_runs m
+JOIN
+apps a
+ON
+m.app_id = a.id
+JOIN
+tenants t
+ON
+a.tenant_id = t.id
+WHERE
+a.name ilike '%{{Table1.searchText}}%'
+GROUP BY
+t.name,m.app_id, a.name
+ORDER BY
+   token_count DESC
+LIMIT
+{{Table1.pageSize}}
+OFFSET
+{{Table1.pageOffset}}
