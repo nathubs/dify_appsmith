@@ -52,7 +52,7 @@
     "oidc_id",
     "EditActions1"
   ],
-  "columnUpdatedAt": 1729494947472,
+  "columnUpdatedAt": 1730948003497,
   "columnWidthMap": {
     "display_name": 299,
     "quota": 266,
@@ -554,7 +554,7 @@
       "isDiscardVisible": true,
       "isEditable": false,
       "isSaveVisible": true,
-      "isVisible": true,
+      "isVisible": false,
       "label": "oidc_id",
       "notation": "standard",
       "originalId": "oidc_id",
