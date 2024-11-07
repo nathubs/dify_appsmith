@@ -1,0 +1,21 @@
+SELECT
+	COALESCE(ROUND(AVG(date_avg_ssn_interaction_num), 3), 0) as total_avg_ssn_interaction_num
+FROM (SELECT 
+		msg_date, 
+		AVG(message_count) AS date_avg_ssn_interaction_num
+	FROM (
+		SELECT 
+			DATE(created_at) AS msg_date, 
+			conversation_id, 
+			COUNT(id) AS message_count
+		FROM
+			public.messages
+		WHERE
+			app_id = '{{utils.getAppID()}}'
+			AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date, conversation_id
+		ORDER BY
+			msg_date)
+	GROUP BY
+		msg_date);

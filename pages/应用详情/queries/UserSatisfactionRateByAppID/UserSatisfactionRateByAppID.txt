@@ -1,0 +1,19 @@
+SELECT
+	DATE(m.created_at) AS x,
+	CASE
+    WHEN COUNT(m.id) = 0 THEN 0
+    ELSE ROUND(CAST((CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000) AS NUMERIC), 3) 
+	END AS y
+FROM
+	public.messages m
+LEFT JOIN
+	public.message_feedbacks mf
+	ON mf.message_id=m.id AND mf.rating='like'
+WHERE
+	m.app_id = '{{utils.getAppID()}}'
+	AND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+GROUP BY 
+	x 
+ORDER BY 
+	x
+LIMIT 15;

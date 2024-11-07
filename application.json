@@ -1,7 +1,7 @@
 {
   "appIsExample": false,
   "appLayout": {
-    "type": "DESKTOP"
+    "type": "FLUID"
   },
   "applicationDetail": {
     "appPositioning": {
@@ -53,10 +53,14 @@
     {
       "id": "应用报表",
       "isDefault": false
+    },
+    {
+      "id": "应用详情",
+      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
-    "type": "DESKTOP"
+    "type": "FLUID"
   },
   "unpublishedApplicationDetail": {
     "appPositioning": {

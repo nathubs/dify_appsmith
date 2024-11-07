@@ -1,0 +1,72 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 5,
+  "boxShadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "defaultOptionValue": "{{ ((options, serverSideFiltering) => ( utils.getLastDaysRange(7)))(SelectDate.options, SelectDate.serverSideFiltering) }}",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "sourceData"
+    },
+    {
+      "key": "defaultOptionValue"
+    }
+  ],
+  "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "sourceData"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onDropdownClose"
+    }
+  ],
+  "isDisabled": false,
+  "isFilterable": true,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "a62fda2d05",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelText": "",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 55,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 9,
+  "mobileLeftColumn": 8,
+  "mobileRightColumn": 28,
+  "mobileTopRow": 2,
+  "needsErrorInfo": false,
+  "onDropdownClose": "{{JSObject1.SelectDateonDropdownClose();}}",
+  "optionLabel": "name",
+  "optionValue": "code",
+  "originalBottomRow": 14,
+  "originalTopRow": 10,
+  "parentColumnSpace": 19.125,
+  "parentId": "0",
+  "parentRowSpace": 10,
+  "placeholderText": "请选择",
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 63,
+  "serverSideFiltering": false,
+  "sourceData": "[\n  {\n    \"name\": \"过去一周\",\n    \"code\": \"{{utils.getLastDaysRange(7)}}\"\n  },\n  {\n    \"name\": \"过去一个月\",\n    \"code\": \"{{utils.getLastDaysRange(30)}}\"\n  },\n\t{\n    \"name\": \"过去一季度\",\n    \"code\": \"{{utils.getLastDaysRange(90)}}\"\n  },\n\t{\n    \"name\": \"过去一年\",\n    \"code\": \"{{utils.getLastDaysRange(365)}}\"\n  }\n\t]",
+  "topRow": 1,
+  "type": "SELECT_WIDGET",
+  "version": 1,
+  "widgetId": "x0dgbzb62a",
+  "widgetName": "SelectDate"
+}

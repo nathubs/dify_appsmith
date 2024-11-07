@@ -4,7 +4,7 @@
   "borderColor": "#E0DEDE",
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "borderWidth": "1",
-  "bottomRow": 98,
+  "bottomRow": 100,
   "boxShadow": "{{appsmith.theme.boxShadow.appBoxShadow}}",
   "canFreezeColumn": true,
   "childStylesheet": {
@@ -104,6 +104,9 @@
     },
     {
       "key": "onSort"
+    },
+    {
+      "key": "onRowSelected"
     }
   ],
   "enableClientSideSearch": false,
@@ -127,6 +130,7 @@
   "mobileTopRow": 38,
   "needsErrorInfo": false,
   "onPageChange": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
+  "onRowSelected": "{{navigateTo('应用详情', {\n\t\"selectedAppID\": Table1.selectedRow.app_id,\n\t\"selectedAppName\": Table1.selectedRow.appname\n}, 'SAME_WINDOW');}}",
   "onSearchTextChanged": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
   "onSort": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
   "originalBottomRow": 98,
@@ -361,7 +365,7 @@
   "serverSidePaginationEnabled": true,
   "tableData": "{{AppsQueryByPage.data}}",
   "textSize": "0.875rem",
-  "topRow": 36,
+  "topRow": 38,
   "totalRecordsCount": "{{TotalRecordAppQuery.data[0].count}}",
   "type": "TABLE_WIDGET_V2",
   "version": 2,

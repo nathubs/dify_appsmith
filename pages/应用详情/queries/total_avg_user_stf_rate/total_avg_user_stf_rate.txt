@@ -1,0 +1,20 @@
+SELECT
+	COALESCE(ROUND(CAST(AVG(date_user_stf_rate) AS NUMERIC), 3), 0) AS total_avg_user_stf_rate
+FROM (SELECT
+		DATE(m.created_at) AS msg_date,
+		CASE
+			WHEN COUNT(m.id) = 0 THEN 0
+			ELSE CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000 
+		END AS date_user_stf_rate
+	FROM
+		public.messages m
+	LEFT JOIN
+		public.message_feedbacks mf
+		ON mf.message_id=m.id AND mf.rating='like'
+	WHERE
+		m.app_id = '{{utils.getAppID()}}'
+		AND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY 
+		msg_date 
+	ORDER BY 
+		msg_date);

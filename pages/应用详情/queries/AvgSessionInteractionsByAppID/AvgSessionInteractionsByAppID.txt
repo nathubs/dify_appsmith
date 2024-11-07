@@ -1,0 +1,20 @@
+SELECT 
+	msg_date AS x, 
+	ROUND(AVG(message_count), 3) AS y
+FROM (
+	SELECT 
+		DATE(created_at) AS msg_date, 
+		conversation_id, 
+		COUNT(id) AS message_count
+	FROM
+		public.messages
+	WHERE
+		app_id = '{{utils.getAppID()}}'
+		AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY
+		msg_date, conversation_id
+	ORDER BY
+		msg_date)
+GROUP BY
+	msg_date
+LIMIT 15;

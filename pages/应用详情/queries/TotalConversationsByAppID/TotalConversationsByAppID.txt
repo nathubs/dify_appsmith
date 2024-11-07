@@ -1,0 +1,13 @@
+SELECT
+	DATE(created_at) AS x,
+	COUNT(DISTINCT conversation_id) AS y
+FROM
+	public.messages
+WHERE
+	app_id = '{{utils.getAppID()}}'
+	AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+GROUP BY
+	x
+ORDER BY
+	x
+LIMIT 15;

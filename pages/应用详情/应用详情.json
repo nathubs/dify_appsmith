@@ -1,23 +1,24 @@
 {
-  "gitSyncId": "671b096154c46730aaa1eabc_589cef31-0396-4bea-ad9f-3b526cb5293a",
+  "gitSyncId": "671b096154c46730aaa1eabc_3f808265-8fbc-41df-9bd3-5d54b373d5c0",
   "unpublishedPage": {
-    "isHidden": false,
+    "isHidden": true,
     "layouts": [
       {
         "dsl": {
           "backgroundColor": "none",
-          "bottomRow": 1500,
+          "bottomRow": 1620,
           "canExtend": true,
           "containerStyle": "none",
           "detachFromLayout": true,
           "dynamicBindingPathList": [],
+          "dynamicTriggerPathList": [],
           "leftColumn": 0,
-          "minHeight": 900,
+          "minHeight": 1292,
           "parentColumnSpace": 1,
           "parentRowSpace": 1,
-          "rightColumn": 1224,
+          "rightColumn": 4896,
           "snapColumns": 64,
-          "snapRows": 88,
+          "snapRows": 124,
           "topRow": 0,
           "type": "CANVAS_WIDGET",
           "version": 90,
@@ -26,7 +27,7 @@
         }
       }
     ],
-    "name": "应用报表",
+    "name": "应用详情",
     "slug": ""
   }
 }
