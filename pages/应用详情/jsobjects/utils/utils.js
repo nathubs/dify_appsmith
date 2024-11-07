@@ -32,7 +32,7 @@ export default {
 	getQueryData: (query_func)=> {
 		var query_data = query_func.data;
 		console.log(query_data);
-		if (query_data !== '[]') {
+		if (query_data.length !== 0) {
 			return query_data;
 		}
 		query_data = [];
@@ -40,7 +40,7 @@ export default {
 		for (var i = 7; i > 0; i--) {
 			const startDate = new Date(today);
 			startDate.setDate(today.getDate() - i);
-			query_data.push({'x': startDate, 'y': 0})
+			query_data.push({'x': utils.formatDate(startDate), 'y': 0})
 		}
 		return query_data;
 	},
