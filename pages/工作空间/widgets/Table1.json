@@ -34,15 +34,16 @@
     "tenant_id",
     "token",
     "worknamespace",
-    "username",
     "display_name",
+    "username",
     "qutoa",
     "used_quota"
   ],
-  "columnUpdatedAt": 1727403790709,
+  "columnUpdatedAt": 1730947858110,
   "columnWidthMap": {
     "display_name": 183,
     "tenant_id": 332,
+    "username": 165,
     "worknamespace": 179
   },
   "defaultPageSize": 0,
@@ -307,7 +308,7 @@
       "isDiscardVisible": true,
       "isEditable": false,
       "isSaveVisible": true,
-      "isVisible": false,
+      "isVisible": true,
       "label": "用户ID",
       "notation": "standard",
       "originalId": "username",
