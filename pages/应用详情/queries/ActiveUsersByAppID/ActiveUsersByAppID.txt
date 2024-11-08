@@ -4,8 +4,7 @@ SELECT
 FROM
 	public.messages
 WHERE
-	from_end_user_id IS NOT NULL
-	AND app_id = '{{utils.getAppID()}}'
+	app_id = '{{utils.getAppID()}}'
 	AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
 GROUP BY
 	x
