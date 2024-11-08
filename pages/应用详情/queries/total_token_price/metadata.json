@@ -1,11 +1,11 @@
 {
-  "gitSyncId": "671b096154c46730aaa1eabc_fbbc9efc-ac52-4299-89b8-7b08b647dc0c",
-  "id": "应用详情_total_message_num",
+  "gitSyncId": "671b096154c46730aaa1eabc_55b40c3a-3817-43cc-ad7e-84847256cc6f",
+  "id": "应用详情_total_token_price",
   "pluginId": "postgres-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(SUM(date_message_num), 0) AS total_message_num\nFROM (SELECT\n\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\tCOUNT(id) AS date_message_num\nFROM\n\tpublic.messages\nWHERE\n\tapp_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tmsg_date\nORDER BY\n\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(SUM(date_total_price), 0) as total_token_price\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\tSUM(total_price) AS date_total_price\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY \n\t\tmsg_date \n\tORDER BY \n\t\tmsg_date);",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -28,7 +28,7 @@
       }
     ],
     "executeOnLoad": true,
-    "name": "total_message_num",
+    "name": "total_token_price",
     "pageId": "应用详情",
     "userSetOnLoad": false
   }

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(SUM(date_active_user_count), 0) AS total_active_user_num\nFROM (SELECT\n\t\tDATE(created_at) AS msg_date, \n\t\tCOUNT(DISTINCT from_end_user_id) AS date_active_user_count\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tfrom_end_user_id IS NOT NULL\n\t\tAND app_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date\n\tORDER BY\n\t\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(SUM(date_active_user_count), 0) AS total_active_user_num\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, \n\t\tCOUNT(DISTINCT from_end_user_id) AS date_active_user_count\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tfrom_end_user_id IS NOT NULL\n\t\tAND app_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date\n\tORDER BY\n\t\tmsg_date);",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

@@ -1,8 +1,8 @@
 SELECT
-	COALESCE(SUM(date_token_usage), 0) AS total_token_usage
+	COALESCE(SUM(date_total_price), 0) as total_token_price
 FROM (SELECT
 		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
-		(SUM(messages.message_tokens) + SUM(messages.answer_tokens)) AS date_token_usage
+		SUM(total_price) AS date_total_price
 	FROM
 		public.messages
 	WHERE

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(ROUND(AVG(date_avg_ssn_interaction_num), 3), 0) as total_avg_ssn_interaction_num\nFROM (SELECT \n\t\tmsg_date, \n\t\tAVG(message_count) AS date_avg_ssn_interaction_num\n\tFROM (\n\t\tSELECT \n\t\t\tDATE(created_at) AS msg_date, \n\t\t\tconversation_id, \n\t\t\tCOUNT(id) AS message_count\n\t\tFROM\n\t\t\tpublic.messages\n\t\tWHERE\n\t\t\tapp_id = '{{utils.getAppID()}}'\n\t\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\t\tGROUP BY\n\t\t\tmsg_date, conversation_id\n\t\tORDER BY\n\t\t\tmsg_date)\n\tGROUP BY\n\t\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(ROUND(AVG(date_avg_ssn_interaction_num), 3), 0) as total_avg_ssn_interaction_num\nFROM (SELECT \n\t\tmsg_date, \n\t\tAVG(message_count) AS date_avg_ssn_interaction_num\n\tFROM (\n\t\tSELECT \n\t\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, \n\t\t\tconversation_id, \n\t\t\tCOUNT(id) AS message_count\n\t\tFROM\n\t\t\tpublic.messages\n\t\tWHERE\n\t\t\tapp_id = '{{utils.getAppID()}}'\n\t\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\t\tGROUP BY\n\t\t\tmsg_date, conversation_id\n\t\tORDER BY\n\t\t\tmsg_date)\n\tGROUP BY\n\t\tmsg_date);",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

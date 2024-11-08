@@ -1,7 +1,7 @@
 export default {
 	// initialize: () => {
-		// storeValue('docIndex', 0);
-		// storeValue('selectedStatus', '')
+	// storeValue('docIndex', 0);
+	// storeValue('selectedStatus', '')
 	// },
 	getAppID: ()=> {
 		return appsmith.URL.queryParams.selectedAppID;
@@ -10,23 +10,23 @@ export default {
 		return appsmith.URL.queryParams.selectedAppName;
 	},
 	formatDate: (date)=> {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份需要加1
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份需要加1
+		const day = String(date.getDate()).padStart(2, '0');
+		return `${year}-${month}-${day}`;
 	},
-  getLastDaysRange: (dayNum)=> {
-    const today = new Date();
-    // const endDate = new Date(today); // 今天是结束日期
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - dayNum); // 最近7天开始日期
+	getLastDaysRange: (dayNum)=> {
+		const today = new Date();
+		// const endDate = new Date(today); // 今天是结束日期
+		const startDate = new Date(today);
+		startDate.setDate(today.getDate() - dayNum); // 最近7天开始日期
 		return utils.formatDate(startDate);
 	},
 	getLastDays: (dayNum)=> {
-    const today = new Date();
-    // const endDate = new Date(today); // 今天是结束日期
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - dayNum); // 最近7天开始日期
+		const today = new Date();
+		// const endDate = new Date(today); // 今天是结束日期
+		const startDate = new Date(today);
+		startDate.setDate(today.getDate() - dayNum); // 最近7天开始日期
 		return startDate.valueOf()/1000
 	},
 	getQueryData: (query_func)=> {
@@ -45,23 +45,20 @@ export default {
 		return query_data;
 	},
 	transferNumUnit: (num)=> {
-		if (num > 1000) {
-			return Math.floor(num / 1000) + 'k';
+		if (num < 1000){
+			return num;
 		}
-		else if (num > 1000 * 1000) {
-			return Math.floor(num / 1000 / 1000) + 'm';
+		var quotient = Math.floor(num / 1000);
+		var remainder = num % 1000;
+		if (remainder >= 500) {
+			quotient++
 		}
-		else if (num > 1000 * 1000 * 1000) {
-			return Math.floor(num / 1000 / 1000 / 1000) + 'b';
-		}
-		else {
-			return num
-		}
+		return quotient.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'k';
 	},
 	// test: ()=> {
-		// let res = utils.str2timestamp(SelectDate.selectedOptionValue)
-		// console.log(res)
-		// return res
+	// let res = utils.str2timestamp(SelectDate.selectedOptionValue)
+	// console.log(res)
+	// return res
 	// },	
 	str2timestamp: (dateString)=> {
 		// let dateString = "2023-10-04"; // 自定义格式的日期字符串

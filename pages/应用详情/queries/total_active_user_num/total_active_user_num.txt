@@ -1,7 +1,7 @@
 SELECT
 	COALESCE(SUM(date_active_user_count), 0) AS total_active_user_num
 FROM (SELECT
-		DATE(created_at) AS msg_date, 
+		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
 		COUNT(DISTINCT from_end_user_id) AS date_active_user_count
 	FROM
 		public.messages

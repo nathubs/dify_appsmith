@@ -2,7 +2,7 @@ export default {
 	SelectDateonDropdownClose () {
 		//	write code here
 		TotalConversationsByAppID.run()
-		total_active_user_num.run()
+		total_conversation_num.run()
 		ActiveUsersByAppID.run()
 		total_active_user_num.run()
 		AvgSessionInteractionsByAppID.run()

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tDATE(created_at) AS x, \n\tCOUNT(DISTINCT from_end_user_id) AS y\nFROM\n\tpublic.messages\nWHERE\n\tfrom_end_user_id IS NOT NULL\n\tAND app_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tx\nORDER BY\n\tx\nLIMIT 15;",
+      "body": "SELECT\n\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x, \n\tCOUNT(DISTINCT from_end_user_id) AS y\nFROM\n\tpublic.messages\nWHERE\n\tfrom_end_user_id IS NOT NULL\n\tAND app_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tx\nORDER BY\n\tx\nLIMIT 15;",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

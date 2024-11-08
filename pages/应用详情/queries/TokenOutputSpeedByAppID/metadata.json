@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n  DATE(created_at) AS x,\n  CASE\n    WHEN SUM(provider_response_latency) = 0 THEN 0\n    ELSE ROUND(CAST((SUM(answer_tokens) / SUM(provider_response_latency)) as NUMERIC), 3)\n  END AS y\nFROM\n  public.messages\nWHERE\n  app_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tx\nORDER BY\n\tx\nLIMIT 15;",
+      "body": "SELECT\n  DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x,\n  CASE\n    WHEN SUM(provider_response_latency) = 0 THEN 0\n    ELSE ROUND(CAST((SUM(answer_tokens) / SUM(provider_response_latency)) as NUMERIC), 3)\n  END AS y\nFROM\n  public.messages\nWHERE\n  app_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tx\nORDER BY\n\tx\nLIMIT 15;",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

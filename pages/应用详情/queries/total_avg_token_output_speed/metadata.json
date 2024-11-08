@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(ROUND(CAST(AVG(date_token_output_speed) AS NUMERIC), 3), 0) AS total_avg_token_output_speed\nFROM (SELECT\n\t\tDATE(created_at) AS msg_date,\n\t\tCASE\n\t\t\tWHEN SUM(provider_response_latency) = 0 THEN 0\n\t\t\tELSE SUM(answer_tokens) / SUM(provider_response_latency)\n\t\tEND AS date_token_output_speed\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date\n\tORDER BY\n\t\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(ROUND(CAST(AVG(date_token_output_speed) AS NUMERIC), 3), 0) AS total_avg_token_output_speed\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\tCASE\n\t\t\tWHEN SUM(provider_response_latency) = 0 THEN 0\n\t\t\tELSE SUM(answer_tokens) / SUM(provider_response_latency)\n\t\tEND AS date_token_output_speed\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date\n\tORDER BY\n\t\tmsg_date);",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

@@ -43,7 +43,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 47,
   "shouldTruncate": false,
-  "text": "{{total_avg_token_output_speed.data[0].total_avg_token_output_speed}}",
+  "text": "{{total_avg_token_output_speed.data[0].total_avg_token_output_speed}}Token/秒",
   "textAlign": "LEFT",
   "textColor": "#231F20",
   "topRow": 6,

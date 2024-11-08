@@ -3,7 +3,7 @@ SELECT
 	ROUND(AVG(message_count), 3) AS y
 FROM (
 	SELECT 
-		DATE(created_at) AS msg_date, 
+		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
 		conversation_id, 
 		COUNT(id) AS message_count
 	FROM

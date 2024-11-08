@@ -1,7 +1,7 @@
 SELECT
 	COALESCE(SUM(date_conversation_num), 0) AS total_conversation_num
 FROM (SELECT
-	DATE(created_at) AS msg_date,
+	DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
 	COUNT(DISTINCT conversation_id) AS date_conversation_num
 FROM
 	public.messages

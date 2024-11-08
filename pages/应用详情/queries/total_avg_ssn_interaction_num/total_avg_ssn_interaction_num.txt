@@ -5,7 +5,7 @@ FROM (SELECT
 		AVG(message_count) AS date_avg_ssn_interaction_num
 	FROM (
 		SELECT 
-			DATE(created_at) AS msg_date, 
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
 			conversation_id, 
 			COUNT(id) AS message_count
 		FROM

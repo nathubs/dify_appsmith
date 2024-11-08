@@ -1,7 +1,7 @@
 SELECT
 	COALESCE(ROUND(CAST(AVG(date_token_output_speed) AS NUMERIC), 3), 0) AS total_avg_token_output_speed
 FROM (SELECT
-		DATE(created_at) AS msg_date,
+		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
 		CASE
 			WHEN SUM(provider_response_latency) = 0 THEN 0
 			ELSE SUM(answer_tokens) / SUM(provider_response_latency)

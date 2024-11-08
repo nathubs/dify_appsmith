@@ -1,5 +1,5 @@
 SELECT
-	DATE(created_at) AS x,
+	DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x,
 	COUNT(id) AS y
 FROM
 	public.messages

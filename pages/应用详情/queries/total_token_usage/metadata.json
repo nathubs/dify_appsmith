@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(SUM(date_token_usage), 0) AS total_token_usage\nFROM (SELECT\n\t\tDATE(created_at) AS msg_date,\n\t\t(SUM(messages.message_tokens) + SUM(messages.answer_tokens)) AS date_token_usage\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY \n\t\tmsg_date \n\tORDER BY \n\t\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(SUM(date_token_usage), 0) AS total_token_usage\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\t(SUM(messages.message_tokens) + SUM(messages.answer_tokens)) AS date_token_usage\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY \n\t\tmsg_date \n\tORDER BY \n\t\tmsg_date);",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
