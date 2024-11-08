@@ -1,5 +1,5 @@
 SELECT
-	COALESCE(SUM(date_total_price), 0) as total_token_price
+	COALESCE(ROUND(SUM(date_total_price), 4), 0) as total_token_price
 FROM (SELECT
 		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
 		SUM(total_price) AS date_total_price

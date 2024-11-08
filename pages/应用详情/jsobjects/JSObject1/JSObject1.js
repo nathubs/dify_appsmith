@@ -13,6 +13,7 @@ export default {
 		total_avg_user_stf_rate.run()
 		TokenUsageByAppID.run()
 		total_token_usage.run()
+		total_token_price.run()
 		TotalMessagesByAppID.run()
 		total_message_num.run()
 	},
