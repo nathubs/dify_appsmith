@@ -6,6 +6,7 @@ export default {
 		endusernum.run()
 		UserQuotaRank.run()
 		MessagesRank.run()
+		UserTotalUseRank.run()
 		ActivateUserRank.run()
 	},
 	GetSeletData() {
