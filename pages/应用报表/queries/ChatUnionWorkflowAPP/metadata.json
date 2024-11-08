@@ -27,7 +27,7 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": true,
+    "executeOnLoad": false,
     "name": "ChatUnionWorkflowAPP",
     "pageId": "应用报表",
     "userSetOnLoad": false
