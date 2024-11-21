@@ -106,5 +106,5 @@
   "widgetId": "imml0ztbus",
   "widgetName": "Chart2",
   "xAxisName": "user",
-  "yAxisName": "Tokens"
+  "yAxisName": "Tokens(k)"
 }

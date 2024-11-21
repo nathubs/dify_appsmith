@@ -23,6 +23,17 @@ export default {
     startDate.setDate(today.getDate() - dayNum); // 最近7天开始日期
 		return startDate.valueOf()/1000
 	},
+	transferNumUnit: (num)=> {
+		if (num < 1000){
+			return num;
+		}
+		var quotient = Math.floor(num / 1000);
+		var remainder = num % 1000;
+		if (remainder >= 500) {
+			quotient++
+		}
+		return quotient.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + 'k';
+	},
 	// test: ()=> {
 		// let res = utils.str2timestamp(SelectDate.selectedOptionValue)
 		// console.log(res)

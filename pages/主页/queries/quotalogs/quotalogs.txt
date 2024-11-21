@@ -1,6 +1,6 @@
 SELECT   
     (sum(l.prompt_tokens) + sum(l.completion_tokens)) as total_token,
-    sum(l.quota/500000.0) as total_price
+    round(sum(l.quota/500000.0), 6) as total_price
 FROM 
     public.logs l
 WHERE 

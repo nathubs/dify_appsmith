@@ -17,7 +17,7 @@
       "key": "text"
     }
   ],
-  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicHeight": "FIXED",
   "dynamicTriggerPathList": [],
   "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
   "fontSize": "1.875rem",
@@ -28,12 +28,10 @@
   "isLoading": false,
   "isVisible": true,
   "key": "67rbyvuxlz",
-  "leftColumn": 54,
+  "leftColumn": 55,
   "maxDynamicHeight": 9000,
   "minDynamicHeight": 4,
   "minWidth": 450,
-  "originalBottomRow": 9,
-  "originalTopRow": 4,
   "overflow": "NONE",
   "parentColumnSpace": 14.734375,
   "parentId": "u76nlwv1ud",

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT     \n    l.user_id,\n    u.display_name,\n    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as token_count,\n    sum(l.quota/500000.0) as total_price\nFROM \n    logs l\nJOIN\n   users u\nON\n  u.id = l.user_id\nWHERE \n    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}\nGROUP BY \n    l.user_id, u.display_name\nORDER BY \n    total_price desc\nLIMIT 10\t\t\n\t\t",
+      "body": "SELECT     \n    l.user_id,\n    u.display_name,\n    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as token_count,\n    round(sum(l.quota/500000.0), 3) as total_price\nFROM \n    logs l\nJOIN\n   users u\nON\n  u.id = l.user_id\nWHERE \n    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}\nGROUP BY \n    l.user_id, u.display_name\nORDER BY \n    total_price desc\nLIMIT 10\t\t\n\t\t",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

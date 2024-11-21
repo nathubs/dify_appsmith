@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT   \n    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as total_token,\n    sum(l.quota/500000.0) as total_price\nFROM \n    public.logs l\nWHERE \n    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}\nORDER BY \n    total_token desc; ",
+      "body": "SELECT   \n    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as total_token,\n    round(sum(l.quota/500000.0), 6) as total_price\nFROM \n    public.logs l\nWHERE \n    l.created_at> {{utils.str2timestamp(SelectDate.selectedOptionValue) || utils.getLastDays(7)}}\nORDER BY \n    total_token desc; ",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

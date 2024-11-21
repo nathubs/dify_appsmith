@@ -1,8 +1,8 @@
 SELECT     
     l.user_id,
     u.display_name,
-    (sum(l.prompt_tokens) + sum(l.completion_tokens)) as token_count,
-    sum(l.quota/500000.0) as total_price
+    round((sum(l.prompt_tokens) + sum(l.completion_tokens))/1000.0, 1) as token_count,
+    round(sum(l.quota/500000.0), 3) as total_price
 FROM 
     logs l
 JOIN
