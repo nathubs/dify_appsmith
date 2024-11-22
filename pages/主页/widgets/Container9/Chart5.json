@@ -78,6 +78,7 @@
       "key": "customEChartConfig"
     }
   ],
+  "dynamicPropertyPathList": [],
   "dynamicTriggerPathList": [
     {
       "key": "onDataPointClick"
@@ -96,7 +97,7 @@
   "mobileRightColumn": 24,
   "mobileTopRow": 149,
   "needsErrorInfo": true,
-  "onDataPointClick": "",
+  "onDataPointClick": "{{}}",
   "originalBottomRow": 181,
   "originalTopRow": 149,
   "parentId": "68gzfgpykq",
@@ -104,6 +105,7 @@
   "renderMode": "CANVAS",
   "responsiveBehavior": "fill",
   "rightColumn": 64,
+  "setAdaptiveYMin": true,
   "showDataPointLabel": true,
   "topRow": 0,
   "type": "CHART_WIDGET",

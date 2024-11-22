@@ -21,4 +21,4 @@ group by
         a.name
 order by
         terminal_count desc
-limit 20;				
+limit 15;				

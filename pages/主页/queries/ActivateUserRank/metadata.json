@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "select\n        m.app_id,\n        a.name as appName,\n        t.name as WorkspaceName,\n        count(distinct m.from_end_user_id) as terminal_count\nfrom\n     public.messages m\njoin \n    public.apps a\non\n   m.app_id = a.id\njoin \n    public.tenants t \non\n        a.tenant_id = t.id\nwhere\n        m.created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\ngroup by\n        t.name,\n        m.app_id,\n        a.name\norder by\n        terminal_count desc\nlimit 20;\t\t\t\t",
+      "body": "select\n        m.app_id,\n        a.name as appName,\n        t.name as WorkspaceName,\n        count(distinct m.from_end_user_id) as terminal_count\nfrom\n     public.messages m\njoin \n    public.apps a\non\n   m.app_id = a.id\njoin \n    public.tenants t \non\n        a.tenant_id = t.id\nwhere\n        m.created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\ngroup by\n        t.name,\n        m.app_id,\n        a.name\norder by\n        terminal_count desc\nlimit 15;\t\t\t\t",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

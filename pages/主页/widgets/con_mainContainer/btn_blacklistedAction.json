@@ -12,11 +12,7 @@
       "key": "borderRadius"
     }
   ],
-  "dynamicPropertyPathList": [
-    {
-      "key": "onClick"
-    }
-  ],
+  "dynamicPropertyPathList": [],
   "dynamicTriggerPathList": [
     {
       "key": "onClick"
@@ -31,9 +27,9 @@
   "isLoading": false,
   "isVisible": true,
   "key": "xm46ryrjtr",
-  "leftColumn": 55,
+  "leftColumn": 52,
   "minWidth": 120,
-  "onClick": "",
+  "onClick": "{{}}",
   "originalBottomRow": 14,
   "originalTopRow": 10,
   "parentColumnSpace": 18.26171875,
@@ -44,7 +40,7 @@
   "renderMode": "CANVAS",
   "resetFormOnClick": false,
   "responsiveBehavior": "hug",
-  "rightColumn": 64,
+  "rightColumn": 61,
   "searchTags": [
     "click",
     "submit"
