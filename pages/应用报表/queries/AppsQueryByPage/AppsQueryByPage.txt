@@ -1,5 +1,5 @@
 SELECT
-	m_app_id AS BotID, 
+	m_app_id AS app_id, 
 	t_name AS WorkspaceName,
 	a_name AS APPName,
 	SUM(date_token_count) AS token_count, 
@@ -35,7 +35,7 @@ GROUP BY
 	t_name, m_app_id, a_name
 UNION
 SELECT
-	wr_app_id AS BotID, 
+	wr_app_id AS app_id, 
 	t_name AS WorkspaceName,
 	a_name AS APPName,
 	SUM(date_token_count) AS token_count, 

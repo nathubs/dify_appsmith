@@ -31,7 +31,7 @@
     }
   },
   "columnOrder": [
-    "botid",
+    "app_id",
     "appname",
     "workspacename",
     "total_price",
@@ -39,7 +39,7 @@
     "message_count",
     "terminal_count"
   ],
-  "columnUpdatedAt": 1732254387225,
+  "columnUpdatedAt": 1732267865722,
   "columnWidthMap": {
     "app_id": 199,
     "appname": 325,
@@ -91,7 +91,7 @@
       "key": "primaryColumns.message_count.computedValue"
     },
     {
-      "key": "primaryColumns.botid.computedValue"
+      "key": "primaryColumns.app_id.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -144,6 +144,40 @@
   "parentRowSpace": 10,
   "primaryColumnId": "app_id",
   "primaryColumns": {
+    "app_id": {
+      "alias": "app_id",
+      "allowCellWrapping": false,
+      "allowSameOptionsInNewRow": true,
+      "cellBackground": "",
+      "columnType": "text",
+      "computedValue": "{{Table1.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"app_id\"]))}}",
+      "currencyCode": "USD",
+      "decimals": 0,
+      "enableFilter": true,
+      "enableSort": true,
+      "fontStyle": "",
+      "horizontalAlignment": "LEFT",
+      "id": "app_id",
+      "index": 6,
+      "isCellEditable": false,
+      "isCellVisible": true,
+      "isDerived": false,
+      "isDisabled": false,
+      "isDiscardVisible": true,
+      "isEditable": false,
+      "isSaveVisible": true,
+      "isVisible": true,
+      "label": "BotID",
+      "notation": "standard",
+      "originalId": "app_id",
+      "sticky": "",
+      "textColor": "",
+      "textSize": "0.875rem",
+      "thousandSeparator": true,
+      "validation": {},
+      "verticalAlignment": "CENTER",
+      "width": 150
+    },
     "appname": {
       "alias": "appname",
       "allowCellWrapping": false,
@@ -170,40 +204,6 @@
       "label": "Bot名称",
       "notation": "standard",
       "originalId": "appname",
-      "sticky": "",
-      "textColor": "",
-      "textSize": "0.875rem",
-      "thousandSeparator": true,
-      "validation": {},
-      "verticalAlignment": "CENTER",
-      "width": 150
-    },
-    "botid": {
-      "alias": "botid",
-      "allowCellWrapping": false,
-      "allowSameOptionsInNewRow": true,
-      "cellBackground": "",
-      "columnType": "text",
-      "computedValue": "{{Table1.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"botid\"]))}}",
-      "currencyCode": "USD",
-      "decimals": 0,
-      "enableFilter": true,
-      "enableSort": true,
-      "fontStyle": "",
-      "horizontalAlignment": "LEFT",
-      "id": "botid",
-      "index": 0,
-      "isCellEditable": false,
-      "isCellVisible": true,
-      "isDerived": false,
-      "isDisabled": false,
-      "isDiscardVisible": true,
-      "isEditable": false,
-      "isSaveVisible": true,
-      "isVisible": true,
-      "label": "BotID",
-      "notation": "standard",
-      "originalId": "botid",
       "sticky": "",
       "textColor": "",
       "textSize": "0.875rem",
