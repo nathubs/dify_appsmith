@@ -1,24 +1,73 @@
-SELECT     
-    m.app_id, 
-    t.name as WorkspaceName,
-    a.name as APPName,
-    (sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,
-    sum(m.total_price) as total_price,
-		count(*) as message_count,
-		count(distinct m.from_end_user_id) as terminal_count
-FROM 
-    messages m
-JOIN 
-    apps a
-ON 
-    m.app_id = a.id
-JOIN 
-    tenants t 
-ON 
-    a.tenant_id = t.id    
-
-GROUP BY 
-    t.name,m.app_id, a.name 
+SELECT
+	m_app_id AS app_id, 
+	a_name AS appName,
+	t_name AS WorkspaceName,
+	SUM(date_token_count) AS token_count, 
+	SUM(date_total_price) AS total_price, 
+	SUM(date_message_count) AS message_count, 
+	SUM(date_active_user_count) AS terminal_count
+FROM (SELECT
+		DATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+		m.app_id AS m_app_id, 
+		a.name AS a_name, 
+		t.name AS t_name, 
+		(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS date_token_count,
+		SUM(m.total_price) AS date_total_price,
+		COUNT(*) AS date_message_count,
+		COUNT(DISTINCT m.from_end_user_id) AS date_active_user_count
+	FROM
+		messages m
+	JOIN 
+		apps a
+	ON 
+		m.app_id = a.id
+	JOIN 
+		tenants t 
+	ON 
+		a.tenant_id = t.id
+	GROUP BY
+		t.name, m.app_id, a.name, msg_date
+	ORDER BY
+		msg_date)
+GROUP BY
+	t_name, m_app_id, a_name
+UNION
+SELECT
+	wr_app_id AS app_id, 
+	a_name AS appName,
+	t_name AS WorkspaceName,
+	SUM(date_token_count) AS token_count, 
+	SUM(date_total_price) AS total_price, 
+	SUM(date_runs_count) AS message_count, 
+	SUM(date_active_user_count) AS terminal_count
+FROM (SELECT 
+		DATE(DATE_TRUNC('day', wr.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
+		wr.app_id AS wr_app_id, 
+		a.name AS a_name, 
+		t.name AS t_name, 
+		SUM(wr.total_tokens) AS date_token_count,
+		0 AS date_total_price,
+		COUNT(*) AS date_runs_count,
+		COUNT(DISTINCT wr.created_by) AS date_active_user_count
+	FROM 
+		workflow_runs wr 
+	JOIN 
+		apps a
+	ON 
+		wr.app_id = a.id
+	JOIN 
+		tenants t 
+	ON 
+		a.tenant_id = t.id
+	WHERE 
+		a.mode = 'workflow'
+		AND wr.triggered_from = 'app-run'
+	GROUP BY
+		t.name, wr.app_id, a.name, msg_date
+	ORDER BY
+		msg_date)
+GROUP BY
+	t_name, wr_app_id, a_name
 ORDER BY     
     {{(appsmith.store.tabName=='消息数'?'message_count':(appsmith.store.tabName=='活跃用户'?'terminal_count':'token_count'))||'token_count'}} desc
 LIMIT 30	

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "select\n\tapp_id,\n\ta.name as appName,\n\tt.name as WorkspaceName,\n\t(sum(m.message_tokens) + sum(m.answer_tokens)) as token_count,\n   sum(m.total_price) as total_price\nfrom\n\tmessages m\njoin \n    apps a\non\n\tm.app_id = a.id\njoin \n    tenants t \non\n\ta.tenant_id = t.id\ngroup by\n\tt.name,\n\tapp_id,\n\ta.name\norder by\n\ttoken_count desc\nLIMIT 20;\t\n\t",
+      "body": "SELECT\n\tm.app_id,\n\ta.name AS appName,\n\tt.name AS WorkspaceName,\n\t(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS token_count\nFROM\n\tmessages m\nJOIN\n\tapps a\nON\n\tm.app_id = a.id\nJOIN\n\ttenants t \nON\n\ta.tenant_id = t.id\nGROUP BY\n\tt.name, app_id, a.name\nUNION\nSELECT \n\twr.app_id, \n\ta.name AS appName, \n\tt.name AS WorkspaceName, \n\tSUM(wr.total_tokens) AS token_count\nFROM \n\tworkflow_runs wr \nJOIN \n\tapps a\nON \n\twr.app_id = a.id\nJOIN \n\ttenants t \nON \n\ta.tenant_id = t.id\nWHERE \n\ta.mode = 'workflow'\n\tAND wr.triggered_from = 'app-run'\nGROUP BY\n\tt.name, wr.app_id, a.name\nORDER BY\n\ttoken_count DESC\nLIMIT 20;\t\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

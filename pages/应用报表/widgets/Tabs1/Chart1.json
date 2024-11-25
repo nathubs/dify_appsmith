@@ -7,7 +7,7 @@
   "boxShadow": "none",
   "chartData": {
     "ozqtk64b13": {
-      "data": "{{AppQuotaQuery.data.map( (obj) =>{ return  {'x': obj.appname, 'y': obj.token_count } })}}",
+      "data": "{{AppQuotaQuery.data.map( (obj) =>{ return  {'x': obj.appname + \":\" + obj.app_id[0] + obj.app_id[1] + obj.app_id[2], 'y': obj.token_count } })}}",
       "seriesName": ""
     }
   },
@@ -104,7 +104,7 @@
   "mobileRightColumn": 24,
   "mobileTopRow": 1,
   "needsErrorInfo": true,
-  "onDataPointClick": "",
+  "onDataPointClick": "{{}}",
   "originalBottomRow": 32,
   "originalTopRow": 6,
   "parentId": "0xyzjxbkre",

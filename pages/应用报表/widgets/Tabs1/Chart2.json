@@ -3,16 +3,16 @@
   "allowScroll": false,
   "animateLoading": true,
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
-  "bottomRow": 30,
+  "bottomRow": 32,
   "boxShadow": "none",
   "chartData": {
     "uqotafbbmt": {
-      "data": "{{AppEndUserQuery.data.map( (obj) =>{ return  {'x': obj.appname, 'y': obj.terminal_count } })}}",
+      "data": "{{AppEndUserQuery.data.map((obj) =>{ return  {'x': obj.appname + \":\" + obj.app_id[0] + obj.app_id[1] + obj.app_id[2], 'y': obj.terminal_count } })}}",
       "seriesName": ""
     }
   },
-  "chartName": "活跃用户 Top20",
-  "chartType": "COLUMN_CHART",
+  "chartName": "",
+  "chartType": "{{appsmith.store.tokenChartType||\"COLUMN_CHART\"}}",
   "customEChartConfig": "{{\n{\n  \"dataset\": {\n    \"source\": [\n      [\n        \"Day\",\n        \"Baidu\",\n        \"Google\",\n        \"Bing\"\n      ],\n      [\n        \"Mon\",\n        620,\n        120,\n        60\n      ],\n      [\n        \"Tue\",\n        732,\n        132,\n        72\n      ],\n      [\n        \"Wed\",\n        701,\n        101,\n        71\n      ],\n      [\n        \"Thu\",\n        734,\n        134,\n        74\n      ],\n      [\n        \"Fri\",\n        1090,\n        290,\n        190\n      ],\n      [\n        \"Sat\",\n        1130,\n        230,\n        130\n      ],\n      [\n        \"Sun\",\n        1120,\n        220,\n        110\n      ]\n    ]\n  },\n  \"tooltip\": {\n    \"trigger\": \"axis\",\n    \"axisPointer\": {\n      \"type\": \"shadow\"\n    }\n  },\n  \"title\": {\n    \"text\": \"Search Engine Usage\",\n    \"left\": \"center\",\n    \"textStyle\": {\n      \"width\": 200,\n      \"overflow\": \"truncate\"\n    }\n  },\n  \"legend\": {\n    \"top\": 40,\n    \"type\": \"scroll\"\n  },\n  \"grid\": {\n    \"left\": 15,\n    \"right\": 15,\n    \"bottom\": 30,\n    \"top\": 100,\n    \"containLabel\": true\n  },\n  \"xAxis\": [\n    {\n      \"type\": \"category\"\n    }\n  ],\n  \"yAxis\": [\n    {\n      \"type\": \"value\"\n    }\n  ],\n  \"series\": [\n    {\n      \"type\": \"bar\",\n      \"stack\": \"Search Engine\"\n    },\n    {\n      \"type\": \"bar\",\n      \"stack\": \"Search Engine\"\n    },\n    {\n      \"type\": \"bar\",\n      \"stack\": \"Search Engine\"\n    }\n  ]\n}\n}}",
   "customFusionChartConfig": {
     "dataSource": {
@@ -76,6 +76,14 @@
     },
     {
       "key": "customEChartConfig"
+    },
+    {
+      "key": "chartType"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "chartType"
     }
   ],
   "dynamicTriggerPathList": [],
@@ -100,7 +108,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 64,
   "showDataPointLabel": true,
-  "topRow": 0,
+  "topRow": 4,
   "type": "CHART_WIDGET",
   "version": 1,
   "widgetId": "q1bnb85ne8",

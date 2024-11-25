@@ -1,23 +1,43 @@
-select
-	app_id,
-	a.name as appName,
-	t.name as WorkspaceName,
+SELECT
+	m.app_id,
+	a.name AS appName,
+	t.name AS WorkspaceName,
 	count(*) as message_count
-from
+FROM
 	messages m
-join 
-    apps a
-on
+JOIN
+	apps a
+ON
 	m.app_id = a.id
-join 
-    tenants t 
-on
+JOIN
+	tenants t 
+ON
 	a.tenant_id = t.id
-group by
-	t.name,
-	app_id,
-	a.name
-order by
-	message_count desc
+GROUP BY
+	t.name, app_id, a.name
+UNION
+SELECT 
+	wr.app_id, 
+	a.name AS appName, 
+	t.name AS WorkspaceName, 
+	count(*) as message_count
+FROM 
+	workflow_runs wr 
+JOIN 
+	apps a
+ON 
+	wr.app_id = a.id
+JOIN 
+	tenants t 
+ON 
+	a.tenant_id = t.id
+WHERE 
+	a.mode = 'workflow'
+	AND wr.triggered_from = 'app-run'
+GROUP BY
+	t.name, wr.app_id, a.name
+ORDER BY
+	message_count DESC
 LIMIT 20;	
+
 	

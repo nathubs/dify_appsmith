@@ -1,7 +1,7 @@
 SELECT
 	m_app_id AS app_id, 
+	a_name AS appName,
 	t_name AS WorkspaceName,
-	a_name AS APPName,
 	SUM(date_token_count) AS token_count, 
 	SUM(date_total_price) AS total_price, 
 	SUM(date_message_count) AS message_count, 
@@ -9,8 +9,8 @@ SELECT
 FROM (SELECT
 		DATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
 		m.app_id AS m_app_id, 
-		t.name AS t_name, 
 		a.name AS a_name, 
+		t.name AS t_name, 
 		(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS date_token_count,
 		SUM(m.total_price) AS date_total_price,
 		COUNT(*) AS date_message_count,
@@ -36,8 +36,8 @@ GROUP BY
 UNION
 SELECT
 	wr_app_id AS app_id, 
+	a_name AS appName,
 	t_name AS WorkspaceName,
-	a_name AS APPName,
 	SUM(date_token_count) AS token_count, 
 	SUM(date_total_price) AS total_price, 
 	SUM(date_runs_count) AS message_count, 
@@ -45,8 +45,8 @@ SELECT
 FROM (SELECT 
 		DATE(DATE_TRUNC('day', wr.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
 		wr.app_id AS wr_app_id, 
-		t.name AS t_name, 
 		a.name AS a_name, 
+		t.name AS t_name, 
 		SUM(wr.total_tokens) AS date_token_count,
 		0 AS date_total_price,
 		COUNT(*) AS date_runs_count,

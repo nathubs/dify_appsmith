@@ -38,7 +38,7 @@
   "mobileRightColumn": 60,
   "mobileTopRow": 0,
   "needsErrorInfo": false,
-  "onSelectionChange": "{{JSOApps.switchChartView(RadioGroup1);}}",
+  "onSelectionChange": "{{JSOApps.switchChartView(RadioGroup3);}}",
   "options": [
     {
       "label": "柱状图",
@@ -52,13 +52,13 @@
   "originalBottomRow": 6,
   "originalTopRow": 0,
   "parentColumnSpace": 18.8125,
-  "parentId": "0xyzjxbkre",
+  "parentId": "0i7lybt384",
   "parentRowSpace": 10,
   "renderMode": "CANVAS",
   "rightColumn": 64,
   "topRow": 0,
   "type": "RADIO_GROUP_WIDGET",
   "version": 1,
-  "widgetId": "7brjjct6zs",
-  "widgetName": "RadioGroup1"
+  "widgetId": "kzd78ra6k4",
+  "widgetName": "RadioGroup3"
 }

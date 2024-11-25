@@ -6,7 +6,11 @@
   "unpublishedAction": {
     "actionConfiguration": {
       "encodeParamsToggle": true,
-      "jsArguments": [],
+      "jsArguments": [
+        {
+          "name": "radio_group"
+        }
+      ],
       "paginationType": "NONE",
       "timeoutInMillisecond": 10000
     },
