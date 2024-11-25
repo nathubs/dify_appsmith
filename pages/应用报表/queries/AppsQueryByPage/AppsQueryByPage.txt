@@ -62,7 +62,8 @@ FROM (SELECT
 	ON 
 		a.tenant_id = t.id
 	WHERE 
-		a.name ilike '%{{Table1.searchText}}%' 
+		a.mode = 'workflow'
+		AND a.name ilike '%{{Table1.searchText}}%' 
 		AND wr.triggered_from = 'app-run'
 	GROUP BY
 		t.name, wr.app_id, a.name, msg_date
