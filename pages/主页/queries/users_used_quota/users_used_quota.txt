@@ -1,1 +1,1 @@
-SELECT "username" AS "x",used_quota / 500000.0 AS "y" FROM public."users" ORDER BY "used_quota" DESC LIMIT 10;
+SELECT "username" AS "x",used_quota / 500000.0 AS "y" FROM public."users" ORDER BY "used_quota" DESC LIMIT 15;

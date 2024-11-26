@@ -45,7 +45,7 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "{{endusernum.data[0].endusercount}}",
+  "text": "{{endusernum.data[0].total_active_user_count}}",
   "textAlign": "LEFT",
   "textColor": "#3f3f46",
   "topRow": 4,

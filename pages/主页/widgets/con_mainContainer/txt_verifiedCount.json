@@ -45,7 +45,7 @@
     "label"
   ],
   "shouldTruncate": false,
-  "text": "{{messages_num.data[0].count}}",
+  "text": "{{messages_num.data[0].total_message_num}}",
   "textAlign": "LEFT",
   "textColor": "#3f3f46",
   "topRow": 4,

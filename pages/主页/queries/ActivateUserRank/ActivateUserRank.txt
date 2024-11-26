@@ -1,24 +1,68 @@
-select
-        m.app_id,
-        a.name as appName,
-        t.name as WorkspaceName,
-        count(distinct m.from_end_user_id) as terminal_count
-from
-     public.messages m
-join 
-    public.apps a
-on
-   m.app_id = a.id
-join 
-    public.tenants t 
-on
-        a.tenant_id = t.id
-where
-        m.created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
-group by
-        t.name,
-        m.app_id,
-        a.name
-order by
-        terminal_count desc
-limit 15;				
+SELECT
+	m_app_id AS app_id, 
+	a_name AS appName,
+	a_mode AS appMode, 
+	t_name AS WorkspaceName,
+	SUM(date_active_user_count) AS terminal_count
+FROM (SELECT
+		DATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+		m.app_id AS m_app_id, 
+		a.name AS a_name, 
+		a.mode AS a_mode, 
+		t.name AS t_name, 
+		COUNT(DISTINCT m.from_end_user_id) AS date_active_user_count
+	FROM
+		messages m
+	JOIN 
+		apps a
+	ON 
+		m.app_id = a.id
+	JOIN 
+		tenants t 
+	ON 
+		a.tenant_id = t.id
+	WHERE
+		m.created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY
+		t.name, m.app_id, a.name, a.mode, msg_date
+	ORDER BY
+		msg_date)
+GROUP BY
+	t_name, m_app_id, a_name, a_mode
+UNION
+SELECT
+	wr_app_id AS app_id, 
+	a_name AS appName,
+	a_mode AS appMode, 
+	t_name AS WorkspaceName,
+	SUM(date_active_user_count) AS terminal_count
+FROM (SELECT 
+		DATE(DATE_TRUNC('day', wr.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
+		wr.app_id AS wr_app_id, 
+		a.name AS a_name, 
+		a.mode AS a_mode, 
+		t.name AS t_name, 
+		COUNT(DISTINCT wr.created_by) AS date_active_user_count
+	FROM 
+		workflow_runs wr 
+	JOIN 
+		apps a
+	ON 
+		wr.app_id = a.id
+	JOIN 
+		tenants t 
+	ON 
+		a.tenant_id = t.id
+	WHERE 
+		a.mode = 'workflow'
+		AND wr.triggered_from = 'app-run'
+		AND wr.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY
+		t.name, wr.app_id, a.name, a.mode, msg_date
+	ORDER BY
+		msg_date)
+GROUP BY
+	t_name, wr_app_id, a_name, a_mode
+ORDER BY     
+	terminal_count DESC
+LIMIT 15;

@@ -15,5 +15,5 @@ GROUP BY
     l.user_id, u.display_name
 ORDER BY 
     token_count desc
-LIMIT 10		
+LIMIT 15		
 		

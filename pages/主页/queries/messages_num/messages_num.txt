@@ -1,1 +1,28 @@
-SELECT COUNT(*) FROM public."messages" where created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}';
+SELECT
+	(SELECT
+		COALESCE(SUM(date_message_num_chat), 0)
+	FROM (SELECT
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
+			COUNT(id) AS date_message_num_chat
+		FROM
+			public.messages
+		WHERE
+			created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date
+		ORDER BY
+			msg_date)) + 
+	(SELECT
+		COALESCE(SUM(date_message_num_workflow), 0)
+	FROM (SELECT
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
+			COUNT(id) AS date_message_num_workflow
+		FROM
+			public.workflow_runs
+		WHERE
+			triggered_from = 'app-run'
+			AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date
+		ORDER BY
+			msg_date)) AS total_message_num

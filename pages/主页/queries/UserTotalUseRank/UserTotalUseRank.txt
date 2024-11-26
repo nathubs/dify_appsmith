@@ -15,5 +15,5 @@ GROUP BY
     l.user_id, u.display_name
 ORDER BY 
     total_price desc
-LIMIT 10		
+LIMIT 15	
 		

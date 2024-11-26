@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT COUNT(*) FROM public.\"messages\" where created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}';",
+      "body": "SELECT\n\t(SELECT\n\t\tCOALESCE(SUM(date_message_num_chat), 0)\n\tFROM (SELECT\n\t\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\t\tCOUNT(id) AS date_message_num_chat\n\t\tFROM\n\t\t\tpublic.messages\n\t\tWHERE\n\t\t\tcreated_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\t\tGROUP BY\n\t\t\tmsg_date\n\t\tORDER BY\n\t\t\tmsg_date)) + \n\t(SELECT\n\t\tCOALESCE(SUM(date_message_num_workflow), 0)\n\tFROM (SELECT\n\t\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\t\tCOUNT(id) AS date_message_num_workflow\n\t\tFROM\n\t\t\tpublic.workflow_runs\n\t\tWHERE\n\t\t\ttriggered_from = 'app-run'\n\t\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\t\tGROUP BY\n\t\t\tmsg_date\n\t\tORDER BY\n\t\t\tmsg_date)) AS total_message_num",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

@@ -1,5 +1,28 @@
-select
-        count(distinct m.from_end_user_id) as enduserCount
-from
-        public.messages m
-where created_at>'{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+SELECT
+	(SELECT
+		COALESCE(SUM(date_active_user_count_chat), 0)
+	FROM (SELECT
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+			COUNT(DISTINCT from_end_user_id) AS date_active_user_count_chat
+		FROM
+			public.messages
+		WHERE
+			created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date
+		ORDER BY
+			msg_date)) +
+	(SELECT
+		COALESCE(SUM(date_active_user_count_workflow), 0)
+	FROM (SELECT
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+			COUNT(DISTINCT created_by) AS date_active_user_count_workflow
+		FROM
+			public.workflow_runs
+		WHERE
+			triggered_from = 'app-run'
+			AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date
+		ORDER BY
+			msg_date)) AS total_active_user_count
