@@ -1,6 +1,7 @@
 SELECT
 	m.app_id,
 	a.name AS appName,
+	a.mode AS appMode, 
 	t.name AS WorkspaceName,
 	count(*) as message_count
 FROM
@@ -14,11 +15,12 @@ JOIN
 ON
 	a.tenant_id = t.id
 GROUP BY
-	t.name, app_id, a.name
+	t.name, m.app_id, a.name, a.mode
 UNION
 SELECT 
 	wr.app_id, 
 	a.name AS appName, 
+	a.mode AS appMode, 
 	t.name AS WorkspaceName, 
 	count(*) as message_count
 FROM 
@@ -35,7 +37,7 @@ WHERE
 	a.mode = 'workflow'
 	AND wr.triggered_from = 'app-run'
 GROUP BY
-	t.name, wr.app_id, a.name
+	t.name, wr.app_id, a.name, a.mode
 ORDER BY
 	message_count DESC
 LIMIT 20;	

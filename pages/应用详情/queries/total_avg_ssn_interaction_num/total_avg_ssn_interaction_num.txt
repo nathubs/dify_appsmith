@@ -18,4 +18,4 @@ FROM (SELECT
 		ORDER BY
 			msg_date)
 	GROUP BY
-		msg_date);
+		msg_date)

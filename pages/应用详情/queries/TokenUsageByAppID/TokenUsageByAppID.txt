@@ -10,4 +10,3 @@ GROUP BY
 	x 
 ORDER BY 
 	x
-LIMIT 15;

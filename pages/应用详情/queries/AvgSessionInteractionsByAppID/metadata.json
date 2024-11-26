@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n\tmsg_date AS x, \n\tROUND(AVG(message_count), 3) AS y\nFROM (\n\tSELECT \n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, \n\t\tconversation_id, \n\t\tCOUNT(id) AS message_count\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date, conversation_id\n\tORDER BY\n\t\tmsg_date)\nGROUP BY\n\tmsg_date\nLIMIT 15;",
+      "body": "SELECT \n\tmsg_date AS x, \n\tROUND(AVG(message_count), 3) AS y\nFROM (\n\tSELECT \n\t\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, \n\t\tconversation_id, \n\t\tCOUNT(id) AS message_count\n\tFROM\n\t\tpublic.messages\n\tWHERE\n\t\tapp_id = '{{utils.getAppID()}}'\n\t\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY\n\t\tmsg_date, conversation_id\n\tORDER BY\n\t\tmsg_date)\nGROUP BY\n\tmsg_date",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

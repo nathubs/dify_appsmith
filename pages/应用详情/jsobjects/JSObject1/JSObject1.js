@@ -16,6 +16,15 @@ export default {
 		total_token_price.run()
 		TotalMessagesByAppID.run()
 		total_message_num.run()
+		WorkflowActiveUsersByAppID.run()
+		total_workflow_active_user_num.run()
+		WorkflowAvgUserItrByAppID.run()
+		total_workflow_avg_usr_itr_num.run()
+		WorkflowTokenUsageByAppID.run()
+		total_workflow_token_usage.run()
+		WorkflowTotalMessagesByAppID.run()
+		total_workflow_message_num.run()
+		GetAppType.run()
 	},
 	GetSeletData() {
 		return [

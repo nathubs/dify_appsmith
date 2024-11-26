@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(SUM(date_message_num), 0) AS total_message_num\nFROM (SELECT\n\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\tCOUNT(id) AS date_message_num\nFROM\n\tpublic.messages\nWHERE\n\tapp_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tmsg_date\nORDER BY\n\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(SUM(date_message_num), 0) AS total_message_num\nFROM (SELECT\n\tDATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\tCOUNT(id) AS date_message_num\nFROM\n\tpublic.messages\nWHERE\n\tapp_id = '{{utils.getAppID()}}'\n\tAND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY\n\tmsg_date\nORDER BY\n\tmsg_date)",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

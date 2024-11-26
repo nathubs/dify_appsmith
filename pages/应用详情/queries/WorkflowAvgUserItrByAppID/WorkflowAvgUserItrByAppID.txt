@@ -1,0 +1,20 @@
+SELECT 
+	msg_date AS x, 
+	ROUND(AVG(interactions), 3) AS y
+FROM (
+	SELECT 
+		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+		created_by, 
+		COUNT(id) AS interactions
+	FROM
+		public.workflow_runs
+	WHERE
+		app_id = '{{utils.getAppID()}}'
+		AND triggered_from = 'app-run'
+		AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY
+		msg_date, created_by
+	ORDER BY
+		msg_date)
+GROUP BY
+	msg_date

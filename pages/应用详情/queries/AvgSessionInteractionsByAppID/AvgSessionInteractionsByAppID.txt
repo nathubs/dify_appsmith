@@ -17,4 +17,3 @@ FROM (
 		msg_date)
 GROUP BY
 	msg_date
-LIMIT 15;

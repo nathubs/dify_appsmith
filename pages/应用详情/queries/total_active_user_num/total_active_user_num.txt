@@ -11,4 +11,4 @@ FROM (SELECT
 	GROUP BY
 		msg_date
 	ORDER BY
-		msg_date);
+		msg_date)

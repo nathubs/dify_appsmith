@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tm.app_id,\n\ta.name AS appName,\n\tt.name AS WorkspaceName,\n\t(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS token_count\nFROM\n\tmessages m\nJOIN\n\tapps a\nON\n\tm.app_id = a.id\nJOIN\n\ttenants t \nON\n\ta.tenant_id = t.id\nGROUP BY\n\tt.name, app_id, a.name\nUNION\nSELECT \n\twr.app_id, \n\ta.name AS appName, \n\tt.name AS WorkspaceName, \n\tSUM(wr.total_tokens) AS token_count\nFROM \n\tworkflow_runs wr \nJOIN \n\tapps a\nON \n\twr.app_id = a.id\nJOIN \n\ttenants t \nON \n\ta.tenant_id = t.id\nWHERE \n\ta.mode = 'workflow'\n\tAND wr.triggered_from = 'app-run'\nGROUP BY\n\tt.name, wr.app_id, a.name\nORDER BY\n\ttoken_count DESC\nLIMIT 20;\t\n",
+      "body": "SELECT\n\tm.app_id,\n\ta.name AS appName,\n\ta.mode AS appMode, \n\tt.name AS WorkspaceName,\n\t(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS token_count\nFROM\n\tmessages m\nJOIN\n\tapps a\nON\n\tm.app_id = a.id\nJOIN\n\ttenants t \nON\n\ta.tenant_id = t.id\nGROUP BY\n\tt.name, m.app_id, a.name, a.mode\nUNION\nSELECT \n\twr.app_id, \n\ta.name AS appName, \n\ta.mode AS appMode, \n\tt.name AS WorkspaceName, \n\tSUM(wr.total_tokens) AS token_count\nFROM \n\tworkflow_runs wr \nJOIN \n\tapps a\nON \n\twr.app_id = a.id\nJOIN \n\ttenants t \nON \n\ta.tenant_id = t.id\nWHERE \n\ta.mode = 'workflow'\n\tAND wr.triggered_from = 'app-run'\nGROUP BY\n\tt.name, wr.app_id, a.name, a.mode\nORDER BY\n\ttoken_count DESC\nLIMIT 20;\t\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

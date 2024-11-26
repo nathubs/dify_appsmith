@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tDATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x,\n\tCASE\n    WHEN COUNT(m.id) = 0 THEN 0\n    ELSE ROUND(CAST((CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000) AS NUMERIC), 3) \n\tEND AS y\nFROM\n\tpublic.messages m\nLEFT JOIN\n\tpublic.message_feedbacks mf\n\tON mf.message_id=m.id AND mf.rating='like'\nWHERE\n\tm.app_id = '{{utils.getAppID()}}'\n\tAND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY \n\tx \nORDER BY \n\tx\nLIMIT 15;",
+      "body": "SELECT\n\tDATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x,\n\tCASE\n    WHEN COUNT(m.id) = 0 THEN 0\n    ELSE ROUND(CAST((CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000) AS NUMERIC), 3) \n\tEND AS y\nFROM\n\tpublic.messages m\nLEFT JOIN\n\tpublic.message_feedbacks mf\n\tON mf.message_id=m.id AND mf.rating='like'\nWHERE\n\tm.app_id = '{{utils.getAppID()}}'\n\tAND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\nGROUP BY \n\tx \nORDER BY \n\tx",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

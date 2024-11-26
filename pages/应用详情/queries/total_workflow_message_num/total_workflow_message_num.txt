@@ -1,0 +1,15 @@
+SELECT
+	COALESCE(SUM(date_message_num), 0) AS total_message_num
+FROM (SELECT
+		DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
+		COUNT(id) AS date_message_num
+	FROM
+		public.workflow_runs
+	WHERE
+		app_id = '{{utils.getAppID()}}'
+		AND triggered_from = 'app-run'
+		AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+	GROUP BY
+		msg_date
+	ORDER BY
+		msg_date)

@@ -1,0 +1,13 @@
+SELECT
+	DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS x,
+	SUM(total_tokens) AS y
+FROM
+	public.workflow_runs
+WHERE
+	app_id = '{{utils.getAppID()}}'
+	AND triggered_from = 'app-run'
+	AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+GROUP BY 
+	x 
+ORDER BY 
+	x

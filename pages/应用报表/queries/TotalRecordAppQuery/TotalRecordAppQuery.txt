@@ -2,6 +2,7 @@ WITH data AS (
     SELECT
 			m_app_id AS app_id, 
 			a_name AS appName,
+			a_mode AS appMode, 
 			t_name AS WorkspaceName,
 			SUM(date_token_count) AS token_count, 
 			SUM(date_total_price) AS total_price, 
@@ -11,6 +12,7 @@ WITH data AS (
 				DATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
 				m.app_id AS m_app_id, 
 				a.name AS a_name, 
+				a.mode AS a_mode, 
 				t.name AS t_name, 
 				(SUM(m.message_tokens) + SUM(m.answer_tokens)) AS date_token_count,
 				SUM(m.total_price) AS date_total_price,
@@ -29,15 +31,16 @@ WITH data AS (
 			WHERE
 				a.name ilike '%{{Table1.searchText}}%'
 			GROUP BY
-				t.name, m.app_id, a.name, msg_date
+				t.name, m.app_id, a.name, a.mode, msg_date
 			ORDER BY
 				msg_date)
 		GROUP BY
-			t_name, m_app_id, a_name
+			t_name, m_app_id, a_name, a_mode
 		UNION
 		SELECT
 			wr_app_id AS app_id, 
 			a_name AS appName,
+			a_mode AS appMode, 
 			t_name AS WorkspaceName,
 			SUM(date_token_count) AS token_count, 
 			SUM(date_total_price) AS total_price, 
@@ -47,6 +50,7 @@ WITH data AS (
 				DATE(DATE_TRUNC('day', wr.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,
 				wr.app_id AS wr_app_id, 
 				a.name AS a_name, 
+				a.mode AS a_mode, 
 				t.name AS t_name, 
 				SUM(wr.total_tokens) AS date_token_count,
 				0 AS date_total_price,
@@ -67,11 +71,11 @@ WITH data AS (
 				AND a.name ilike '%{{Table1.searchText}}%' 
 				AND wr.triggered_from = 'app-run'
 			GROUP BY
-				t.name, wr.app_id, a.name, msg_date
+				t.name, wr.app_id, a.name, a.mode, msg_date
 			ORDER BY
 				msg_date)
 		GROUP BY
-			t_name, wr_app_id, a_name
+			t_name, wr_app_id, a_name, a_mode
 )
 SELECT 
     COUNT(*)

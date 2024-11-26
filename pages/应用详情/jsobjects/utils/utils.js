@@ -9,6 +9,19 @@ export default {
 	getAppName: ()=> {
 		return appsmith.URL.queryParams.selectedAppName;
 	},
+	getAppType: ()=> {
+		return GetAppType.data[0].mode;
+	},
+	isVisible: (cur_type)=> {
+		const app_type = utils.getAppType();
+		if ((app_type === 'workflow' && cur_type === 'workflow') || 
+				(app_type !== 'workflow' && cur_type === 'chat')){
+			return 'true';
+		}
+		else{
+			return 'false';
+		}
+	},
 	formatDate: (date)=> {
 		const year = date.getFullYear();
 		const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份需要加1
@@ -43,6 +56,42 @@ export default {
 			query_data.push({'x': utils.formatDate(startDate), 'y': 0})
 		}
 		return query_data;
+	},
+	getTotalMessages: ()=> {
+		const app_type = utils.getAppType();
+		if (app_type !== 'workflow') {
+			return utils.getQueryData(TotalMessagesByAppID);
+		}
+		else {
+			return utils.getQueryData(WorkflowTotalMessagesByAppID);
+		}
+	},
+	getTotalMessageNum: ()=> {
+		const app_type = utils.getAppType();
+		if (app_type !== 'workflow') {
+			return total_message_num.data[0].total_message_num;
+		}
+		else {
+			return total_workflow_message_num.data[0].total_message_num;
+		}
+	},
+	getActiveUsers: ()=> {
+		const app_type = utils.getAppType();
+		if (app_type !== 'workflow') {
+			return utils.getQueryData(ActiveUsersByAppID);
+		}
+		else {
+			return utils.getQueryData(WorkflowActiveUsersByAppID);
+		}
+	},
+	getTotalActiveUserNum: ()=> {
+		const app_type = utils.getAppType();
+		if (app_type !== 'workflow') {
+			return total_active_user_num.data[0].total_active_user_num;
+		}
+		else {
+			return total_workflow_active_user_num.data[0].total_active_user_num;
+		}
 	},
 	transferNumUnit: (num)=> {
 		if (num < 1000){

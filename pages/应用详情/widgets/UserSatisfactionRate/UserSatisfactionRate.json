@@ -5,6 +5,7 @@
   "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
   "borderWidth": "1",
   "bottomRow": 129,
+  "bottomRowBeforeCollapse": 129,
   "boxShadow": "{{appsmith.theme.boxShadow.appBoxShadow}}",
   "children": [
     {
@@ -57,14 +58,22 @@
     },
     {
       "key": "boxShadow"
+    },
+    {
+      "key": "isVisible"
     }
   ],
   "dynamicHeight": "FIXED",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
   "dynamicTriggerPathList": [],
   "flexVerticalAlignment": "stretch",
   "isCanvas": true,
   "isLoading": false,
-  "isVisible": true,
+  "isVisible": "{{utils.isVisible('chat')}}",
   "key": "93icdn0ox3",
   "leftColumn": 1,
   "maxDynamicHeight": 9000,
@@ -75,8 +84,8 @@
   "mobileRightColumn": 15,
   "mobileTopRow": 9,
   "needsErrorInfo": false,
-  "originalBottomRow": 131,
-  "originalTopRow": 90,
+  "originalBottomRow": 129,
+  "originalTopRow": 88,
   "parentColumnSpace": 18,
   "parentId": "0",
   "parentRowSpace": 10,
@@ -85,6 +94,7 @@
   "rightColumn": 32,
   "shouldScrollContents": true,
   "topRow": 88,
+  "topRowBeforeCollapse": 88,
   "type": "CONTAINER_WIDGET",
   "version": 1,
   "widgetId": "vs5vgzmrzi",

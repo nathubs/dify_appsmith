@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n\tCOALESCE(ROUND(CAST(AVG(date_user_stf_rate) AS NUMERIC), 3), 0) AS total_avg_user_stf_rate\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\tCASE\n\t\t\tWHEN COUNT(m.id) = 0 THEN 0\n\t\t\tELSE CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000 \n\t\tEND AS date_user_stf_rate\n\tFROM\n\t\tpublic.messages m\n\tLEFT JOIN\n\t\tpublic.message_feedbacks mf\n\t\tON mf.message_id=m.id AND mf.rating='like'\n\tWHERE\n\t\tm.app_id = '{{utils.getAppID()}}'\n\t\tAND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY \n\t\tmsg_date \n\tORDER BY \n\t\tmsg_date);",
+      "body": "SELECT\n\tCOALESCE(ROUND(CAST(AVG(date_user_stf_rate) AS NUMERIC), 3), 0) AS total_avg_user_stf_rate\nFROM (SELECT\n\t\tDATE(DATE_TRUNC('day', m.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date,\n\t\tCASE\n\t\t\tWHEN COUNT(m.id) = 0 THEN 0\n\t\t\tELSE CAST(COUNT(mf.id) AS FLOAT) / COUNT(m.id) * 1000 \n\t\tEND AS date_user_stf_rate\n\tFROM\n\t\tpublic.messages m\n\tLEFT JOIN\n\t\tpublic.message_feedbacks mf\n\t\tON mf.message_id=m.id AND mf.rating='like'\n\tWHERE\n\t\tm.app_id = '{{utils.getAppID()}}'\n\t\tAND m.created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'\n\tGROUP BY \n\t\tmsg_date \n\tORDER BY \n\t\tmsg_date)",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

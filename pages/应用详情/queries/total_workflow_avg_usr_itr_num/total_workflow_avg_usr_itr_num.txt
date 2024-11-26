@@ -1,0 +1,22 @@
+SELECT
+	COALESCE(ROUND(AVG(date_avg_user_interaction_num), 3), 0) as total_avg_user_interaction_num
+FROM (SELECT 
+		msg_date, 
+		AVG(interactions) AS date_avg_user_interaction_num
+	FROM (
+		SELECT 
+			DATE(DATE_TRUNC('day', created_at AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Shanghai')) AS msg_date, 
+			created_by, 
+			COUNT(id) AS interactions
+		FROM
+			public.workflow_runs
+		WHERE
+			app_id = '{{utils.getAppID()}}'
+			AND triggered_from = 'app-run'
+			AND created_at >= '{{SelectDate.selectedOptionValue || utils.getLastDaysRange(7)}}'
+		GROUP BY
+			msg_date, created_by
+		ORDER BY
+			msg_date)
+	GROUP BY
+		msg_date)
