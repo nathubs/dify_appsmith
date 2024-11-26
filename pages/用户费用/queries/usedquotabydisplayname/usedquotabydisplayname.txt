@@ -9,7 +9,7 @@ ON
 WHERE
   "display_name" ilike '%{{Table1.selectedRow.display_name}}%'
 ORDER BY
-  "{{data_table.sortOrder.column || 'id'}}" {{data_table.sortOrder.order !== "desc" ? "" : "DESC"}}
+  "{{data_table.sortOrder.column || 'created_at'}}" {{data_table.sortOrder.order !== "asc" ? "DESC" : "ASC"}}
 LIMIT
   {{data_table.pageSize}}
 OFFSET

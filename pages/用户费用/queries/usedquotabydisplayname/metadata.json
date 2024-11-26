@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n  l.*,u.display_name AS display_name\nFROM\n  public.logs l\nJOIN\n users u\nON\n u.id=l.user_id\nWHERE\n  \"display_name\" ilike '%{{Table1.selectedRow.display_name}}%'\nORDER BY\n  \"{{data_table.sortOrder.column || 'id'}}\" {{data_table.sortOrder.order !== \"desc\" ? \"\" : \"DESC\"}}\nLIMIT\n  {{data_table.pageSize}}\nOFFSET\n  {{data_table.pageOffset}}",
+      "body": "SELECT\n  l.*,u.display_name AS display_name\nFROM\n  public.logs l\nJOIN\n users u\nON\n u.id=l.user_id\nWHERE\n  \"display_name\" ilike '%{{Table1.selectedRow.display_name}}%'\nORDER BY\n  \"{{data_table.sortOrder.column || 'created_at'}}\" {{data_table.sortOrder.order !== \"asc\" ? \"DESC\" : \"ASC\"}}\nLIMIT\n  {{data_table.pageSize}}\nOFFSET\n  {{data_table.pageOffset}}",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
