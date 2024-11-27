@@ -38,7 +38,7 @@
   "mobileRightColumn": 60,
   "mobileTopRow": 0,
   "needsErrorInfo": false,
-  "onSelectionChange": "{{JSOApps.switchChartView(RadioGroup1);}}",
+  "onSelectionChange": "{{JSOApps.switchChartView();}}",
   "options": [
     {
       "label": "柱状图",

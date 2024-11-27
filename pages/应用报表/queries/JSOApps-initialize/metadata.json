@@ -22,10 +22,10 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": false,
+    "executeOnLoad": true,
     "fullyQualifiedName": "JSOApps.initialize",
     "name": "initialize",
     "pageId": "应用报表",
-    "userSetOnLoad": false
+    "userSetOnLoad": true
   }
 }
