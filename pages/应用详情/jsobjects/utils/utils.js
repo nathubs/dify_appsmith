@@ -1,8 +1,7 @@
 export default {
-	// initialize: () => {
-	// storeValue('docIndex', 0);
-	// storeValue('selectedStatus', '')
-	// },
+	initialize: () => {
+		SelectDate.setSelectedOption(utils.getLastDaysRange(7))
+	},
 	getAppID: ()=> {
 		return appsmith.URL.queryParams.selectedAppID;
 	},

@@ -24,7 +24,6 @@ export default {
 		total_workflow_token_usage.run()
 		WorkflowTotalMessagesByAppID.run()
 		total_workflow_message_num.run()
-		GetAppType.run()
 	},
 	GetSeletData() {
 		return [
