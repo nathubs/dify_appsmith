@@ -10,6 +10,11 @@ export default {
 		return appsmith.URL.queryParams.selectedAppName;
 	},
 	getAppType: ()=> {
+		var query_data = GetAppType.data;
+		if (query_data.length === 0) {
+			return ''
+		}
+		
 		return GetAppType.data[0].mode;
 	},
 	isVisible: (cur_type)=> {
@@ -44,7 +49,6 @@ export default {
 	},
 	getQueryData: (query_func)=> {
 		var query_data = query_func.data;
-		console.log(query_data);
 		if (query_data.length !== 0) {
 			return query_data;
 		}
