@@ -29,7 +29,11 @@ WITH data AS (
 			ON 
 				a.tenant_id = t.id
 			WHERE
-				a.name ilike '%{{Table1.searchText}}%'
+				CASE WHEN '{{JSOApps.getWorkspaceID()}}' = '00000000-0000-0000-0000-000000000000'
+					THEN t.id = t.id
+					ELSE t.id = '{{JSOApps.getWorkspaceID()}}'
+				END
+				AND a.name ilike '%{{Table1.searchText}}%'
 			GROUP BY
 				t.name, m.app_id, a.name, a.mode, msg_date
 			ORDER BY
@@ -67,7 +71,11 @@ WITH data AS (
 			ON 
 				a.tenant_id = t.id
 			WHERE 
-				a.mode = 'workflow'
+				CASE WHEN '{{JSOApps.getWorkspaceID()}}' = '00000000-0000-0000-0000-000000000000'
+					THEN t.id = t.id
+					ELSE t.id = '{{JSOApps.getWorkspaceID()}}'
+				END
+				AND a.mode = 'workflow'
 				AND a.name ilike '%{{Table1.searchText}}%' 
 				AND wr.triggered_from = 'app-run'
 			GROUP BY

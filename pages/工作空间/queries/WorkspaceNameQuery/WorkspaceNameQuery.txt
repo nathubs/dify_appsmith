@@ -1,7 +1,7 @@
 SELECT 
     dtt.tenant_id, 
     dtt.token, 
-    t.name as WorkNamespace,
+    t.name as WorkspaceName,
     u.username ,
     u.display_name ,
     sum(t.remain_quota) as qutoa,

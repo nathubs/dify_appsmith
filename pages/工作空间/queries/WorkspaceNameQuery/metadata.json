@@ -1,11 +1,11 @@
 {
   "gitSyncId": "671b096154c46730aaa1eabc_10c7003a-3fdb-4a22-b49b-308e28f5e1b3",
-  "id": "工作空间_WorkNamespaceQuery",
+  "id": "工作空间_WorkspaceNameQuery",
   "pluginId": "postgres-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \n    dtt.tenant_id, \n    dtt.token, \n    t.name as WorkNamespace,\n    u.username ,\n    u.display_name ,\n    sum(t.remain_quota) as qutoa,\n    sum(t.used_quota)/500000.0 as used_quota \nFROM \n    dify_tenant_tokens dtt\nJOIN \n    tokens t \nON \n    dtt.token = t.key \njoin\n    users u \non\n    t.user_id = u.id \nGROUP BY \n    dtt.tenant_id, \n    dtt.token, \n    t.name,\n    u.username,\n    u.display_name\norder by\n   used_quota desc\n   \n",
+      "body": "SELECT \n    dtt.tenant_id, \n    dtt.token, \n    t.name as WorkspaceName,\n    u.username ,\n    u.display_name ,\n    sum(t.remain_quota) as qutoa,\n    sum(t.used_quota)/500000.0 as used_quota \nFROM \n    dify_tenant_tokens dtt\nJOIN \n    tokens t \nON \n    dtt.token = t.key \njoin\n    users u \non\n    t.user_id = u.id \nGROUP BY \n    dtt.tenant_id, \n    dtt.token, \n    t.name,\n    u.username,\n    u.display_name\norder by\n   used_quota desc\n   \n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
@@ -24,7 +24,7 @@
     },
     "dynamicBindingPathList": [],
     "executeOnLoad": true,
-    "name": "WorkNamespaceQuery",
+    "name": "WorkspaceNameQuery",
     "pageId": "工作空间",
     "userSetOnLoad": false
   }

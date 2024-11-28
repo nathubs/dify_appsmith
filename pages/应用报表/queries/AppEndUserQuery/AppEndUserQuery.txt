@@ -21,6 +21,11 @@ FROM (SELECT
 		tenants t 
 	ON 
 		a.tenant_id = t.id
+	WHERE
+		CASE WHEN '{{JSOApps.getWorkspaceID()}}' = '00000000-0000-0000-0000-000000000000'
+			THEN t.id = t.id
+			ELSE t.id = '{{JSOApps.getWorkspaceID()}}'
+		END
 	GROUP BY
 		t.name, m.app_id, a.name, a.mode, msg_date
 	ORDER BY
@@ -52,7 +57,11 @@ FROM (SELECT
 	ON 
 		a.tenant_id = t.id
 	WHERE 
-		a.mode = 'workflow'
+		CASE WHEN '{{JSOApps.getWorkspaceID()}}' = '00000000-0000-0000-0000-000000000000'
+			THEN t.id = t.id
+			ELSE t.id = '{{JSOApps.getWorkspaceID()}}'
+		END
+		AND a.mode = 'workflow'
 		AND wr.triggered_from = 'app-run'
 	GROUP BY
 		t.name, wr.app_id, a.name, a.mode, msg_date

@@ -33,13 +33,13 @@
   "columnOrder": [
     "tenant_id",
     "token",
-    "worknamespace",
+    "workspacename",
     "display_name",
     "username",
     "qutoa",
     "used_quota"
   ],
-  "columnUpdatedAt": 1730947858110,
+  "columnUpdatedAt": 1732762862761,
   "columnWidthMap": {
     "display_name": 183,
     "tenant_id": 332,
@@ -72,9 +72,6 @@
       "key": "primaryColumns.token.computedValue"
     },
     {
-      "key": "primaryColumns.worknamespace.computedValue"
-    },
-    {
       "key": "primaryColumns.username.computedValue"
     },
     {
@@ -85,6 +82,9 @@
     },
     {
       "key": "primaryColumns.used_quota.computedValue"
+    },
+    {
+      "key": "primaryColumns.workspacename.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -92,7 +92,11 @@
       "key": "tableData"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onRowSelected"
+    }
+  ],
   "enableClientSideSearch": true,
   "flexVerticalAlignment": "start",
   "horizontalAlignment": "LEFT",
@@ -113,6 +117,7 @@
   "mobileRightColumn": 34,
   "mobileTopRow": 34,
   "needsErrorInfo": false,
+  "onRowSelected": "{{navigateTo('应用报表', {\n  \"workspaceID\": Table1.selectedRow.tenant_id,\n  \"workspaceName\": Table1.selectedRow.workspacename\n}, 'SAME_WINDOW');}}",
   "parentId": "0",
   "parentRowSpace": 10,
   "primaryColumns": {
@@ -320,20 +325,20 @@
       "verticalAlignment": "CENTER",
       "width": 150
     },
-    "worknamespace": {
-      "alias": "worknamespace",
+    "workspacename": {
+      "alias": "workspacename",
       "allowCellWrapping": false,
       "allowSameOptionsInNewRow": true,
       "cellBackground": "",
       "columnType": "text",
-      "computedValue": "{{Table1.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"worknamespace\"]))}}",
+      "computedValue": "{{Table1.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"workspacename\"]))}}",
       "currencyCode": "USD",
       "decimals": 0,
       "enableFilter": true,
       "enableSort": true,
       "fontStyle": "",
       "horizontalAlignment": "LEFT",
-      "id": "worknamespace",
+      "id": "workspacename",
       "index": 2,
       "isCellEditable": false,
       "isCellVisible": true,
@@ -343,9 +348,9 @@
       "isEditable": false,
       "isSaveVisible": true,
       "isVisible": true,
-      "label": "工作空间",
+      "label": "工作空间名",
       "notation": "standard",
-      "originalId": "worknamespace",
+      "originalId": "workspacename",
       "sticky": "",
       "textColor": "",
       "textSize": "0.875rem",
@@ -359,7 +364,7 @@
   "responsiveBehavior": "fill",
   "rightColumn": 64,
   "searchKey": "",
-  "tableData": "{{WorkNamespaceQuery.data}}",
+  "tableData": "{{WorkspaceNameQuery.data}}",
   "textSize": "0.875rem",
   "topRow": 34,
   "totalRecordsCount": 0,
