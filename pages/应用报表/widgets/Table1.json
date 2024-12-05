@@ -138,7 +138,7 @@
   "mobileTopRow": 38,
   "needsErrorInfo": false,
   "onPageChange": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
-  "onRowSelected": "{{navigateTo('应用详情', {\n  \"selectedAppID\": Table1.selectedRow.app_id,\n  \"selectedAppName\": Table1.selectedRow.appname\n}, 'SAME_WINDOW');}}",
+  "onRowSelected": "{{navigateTo('应用详情', {\n  \"selectedAppID\": Table1.selectedRow.app_id,\n  \"selectedAppName\": Table1.selectedRow.appname,\n  \"workspaceID\": appsmith.store.workspaceID, \n\t\"workspaceName\": appsmith.store.workspaceName\n}, 'SAME_WINDOW');}}",
   "onSearchTextChanged": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
   "onSort": "{{\n            AppsQueryByPage.run();\n            TotalRecordAppQuery.run()\n          }}",
   "originalBottomRow": 102,

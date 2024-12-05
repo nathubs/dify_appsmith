@@ -30,7 +30,7 @@
   "mobileRightColumn": 17,
   "mobileTopRow": 1,
   "needsErrorInfo": false,
-  "onClick": "{{navigateTo('应用报表', {}, 'SAME_WINDOW');}}",
+  "onClick": "{{navigateTo('应用报表', {\n\t\"workspaceID\": appsmith.store.workspaceID,\n  \"workspaceName\": appsmith.store.workspaceName\n}, 'SAME_WINDOW');}}",
   "parentColumnSpace": 18,
   "parentId": "0",
   "parentRowSpace": 10,

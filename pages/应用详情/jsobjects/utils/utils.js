@@ -2,6 +2,8 @@ export default {
 	initialize: () => {
 		SelectDate.setSelectedOption(utils.getLastDaysRange(7))
 		JSObject1.SelectDateonDropdownClose()
+		storeValue('workspaceID', appsmith.URL.queryParams.workspaceID)
+		storeValue('workspaceName', appsmith.URL.queryParams.workspaceName)
 	},
 	getAppID: ()=> {
 		return appsmith.URL.queryParams.selectedAppID;
