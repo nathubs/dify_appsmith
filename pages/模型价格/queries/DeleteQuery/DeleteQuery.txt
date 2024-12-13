@@ -1,2 +1,0 @@
-DELETE FROM public."logs"
-  WHERE "id" = {{data_table.triggeredRow.id}};

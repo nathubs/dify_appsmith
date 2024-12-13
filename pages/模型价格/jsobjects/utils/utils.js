@@ -1,5 +1,20 @@
 export default {
-	FormatType () {
+	FormatPricingType () {
+		var all_model_type = GetPricing.data.data;
+		var format_type = [];
+		var num = all_model_type.length;
+		for (var i = 0; i < num; i++) {
+			switch (all_model_type[i]["model_type"]) {
+				case "image":
+					format_type.push("按次计费");
+					break;
+				default:
+					format_type.push("按Token计费");
+			}
+		}
+		return format_type;
+	},
+	FormatModelType () {
 		var all_model_type = GetPricing.data.data;
 		var format_type = [];
 		var num = all_model_type.length;
@@ -39,14 +54,31 @@ export default {
 			else {
 				currency = "$";
 			}
+			var return_pair = [];
 			if (all_model_pricing[i]["pricing"]["type"] === "chat") {
-				format_pricing.push(`输入：${currency}${all_model_pricing[i]["pricing"]["input"]/1000}/千字符 输出：${currency}${all_model_pricing[i]["pricing"]["output"]/1000}/千字符`);
+				var input = all_model_pricing[i]["pricing"]["input"] / 1000;
+				input = Math.round(input * 10000000) / 10000000;
+				return_pair.push(`${currency}${input} / 1k tokens`);
+				var output = all_model_pricing[i]["pricing"]["output"] / 1000;
+				if (Math.abs(output - 0) > Number.EPSILON) {
+					output = Math.round(output * 10000000) / 10000000;
+					return_pair.push(`${currency}${output} / 1k tokens`);
+				}
+				else {
+					return_pair.push("");
+				}
+				
+				format_pricing.push(return_pair);
 			}
 			else if (all_model_pricing[i]["pricing"]["type"] === "length") {
-				format_pricing.push(`${currency}${all_model_pricing[i]["pricing"]["input"]}/万字符`);
+				return_pair.push(`${currency}${all_model_pricing[i]["pricing"]["input"] / 10} / 1k tokens`);
+				return_pair.push("");
+				format_pricing.push(return_pair);
 			}
 			else if (all_model_pricing[i]["pricing"]["type"] === "request") {
-				format_pricing.push(`${currency}${all_model_pricing[i]["pricing"]["input"]}/次`);
+				return_pair.push(`${currency}${all_model_pricing[i]["pricing"]["input"]} / 次`);
+				return_pair.push("");
+				format_pricing.push(return_pair);
 			}
 		}
 		return format_pricing;

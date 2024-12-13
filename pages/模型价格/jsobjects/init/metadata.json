@@ -1,8 +1,8 @@
 {
   "gitSyncId": "673edd74e29bde1d391f1ade_34f93715-5ce7-4949-9089-7485c030e12d",
-  "id": "模型价格_ologs",
+  "id": "模型价格_init",
   "unpublishedCollection": {
-    "name": "ologs",
+    "name": "init",
     "pageId": "模型价格",
     "pluginId": "js-plugin",
     "pluginType": "JS",
