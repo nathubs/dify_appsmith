@@ -112,7 +112,7 @@
   "primaryColumnId": "model",
   "primaryColumns": {
     "customColumn1": {
-      "alias": "输出价格",
+      "alias": "输出价格（¥ / 1k tokens）",
       "allowCellWrapping": false,
       "allowSameOptionsInNewRow": true,
       "buttonStyle": "rgb(3, 179, 101)",
@@ -133,7 +133,7 @@
       "isEditable": false,
       "isSaveVisible": true,
       "isVisible": true,
-      "label": "输出价格",
+      "label": "输出价格（¥ / 1k tokens）",
       "labelColor": "#FFFFFF",
       "notation": "standard",
       "originalId": "customColumn1",
@@ -268,7 +268,7 @@
       "isEditable": false,
       "isSaveVisible": true,
       "isVisible": true,
-      "label": "输入价格",
+      "label": "输入价格（¥ / 1k tokens）",
       "notation": "standard",
       "originalId": "pricing",
       "sticky": "",
