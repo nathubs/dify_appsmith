@@ -8,7 +8,7 @@
   "chartData": {
     "jz3gpe827y": {
       "color": "#2563eb",
-      "data": "{{quota.data}}",
+      "data": "{{quota.data.map( (obj) =>{ return  {'x': obj.display_name+\":\"+obj.id, 'y': obj.y}})}}",
       "seriesName": "余额"
     }
   },
