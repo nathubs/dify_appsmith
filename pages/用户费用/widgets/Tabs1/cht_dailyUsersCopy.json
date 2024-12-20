@@ -8,7 +8,7 @@
   "chartData": {
     "jz3gpe827y": {
       "color": "#2563eb",
-      "data": "{{used_quota.data}}",
+      "data": "{{used_quota.data.map( (obj) =>{ return  {'x': obj.display_name+\":\"+obj.id, 'y': obj.y}})}}",
       "seriesName": "消费额度"
     }
   },

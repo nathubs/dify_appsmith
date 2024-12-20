@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT \"display_name\" AS \"x\",used_quota / 500000.0 AS \"y\" FROM public.\"users\" ORDER BY \"used_quota\" DESC LIMIT 20;\n",
+      "body": "SELECT \n\tid, display_name, used_quota / 500000.0 AS y\nFROM \n\tpublic.users \nORDER BY \n\tused_quota DESC \nLIMIT 20;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
