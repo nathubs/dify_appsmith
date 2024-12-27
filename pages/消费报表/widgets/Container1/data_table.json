@@ -26,6 +26,7 @@
     "created_at",
     "display_name",
     "type",
+    "access_key",
     "username",
     "channel_id",
     "token_name",
@@ -43,8 +44,9 @@
     "step": 62,
     "task": 245
   },
-  "columnUpdatedAt": 1727343573531,
+  "columnUpdatedAt": 1735279906036,
   "columnWidthMap": {
+    "access_key": 119,
     "channel_id": 68,
     "completion_tokens": 93,
     "content": 137,
@@ -144,6 +146,9 @@
     },
     {
       "key": "primaryColumns.display_name.computedValue"
+    },
+    {
+      "key": "primaryColumns.access_key.computedValue"
     }
   ],
   "dynamicPropertyPathList": [
@@ -194,6 +199,40 @@
   "parentRowSpace": 10,
   "primaryColumnId": "username",
   "primaryColumns": {
+    "access_key": {
+      "alias": "access_key",
+      "allowCellWrapping": false,
+      "allowSameOptionsInNewRow": true,
+      "cellBackground": "",
+      "columnType": "text",
+      "computedValue": "{{data_table.processedTableData.map((currentRow, currentIndex) => ( currentRow[\"access_key\"]))}}",
+      "currencyCode": "USD",
+      "decimals": 0,
+      "enableFilter": true,
+      "enableSort": true,
+      "fontStyle": "",
+      "horizontalAlignment": "LEFT",
+      "id": "access_key",
+      "index": 14,
+      "isCellEditable": false,
+      "isCellVisible": true,
+      "isDerived": false,
+      "isDisabled": false,
+      "isDiscardVisible": true,
+      "isEditable": false,
+      "isSaveVisible": true,
+      "isVisible": true,
+      "label": "access_key",
+      "notation": "standard",
+      "originalId": "access_key",
+      "sticky": "",
+      "textColor": "",
+      "textSize": "0.875rem",
+      "thousandSeparator": true,
+      "validation": {},
+      "verticalAlignment": "CENTER",
+      "width": 150
+    },
     "channel_id": {
       "alias": "channel_id",
       "allowCellWrapping": false,

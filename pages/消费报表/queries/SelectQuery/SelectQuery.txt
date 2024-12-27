@@ -1,9 +1,20 @@
-SELECT l.*,u.display_name as display_name FROM logs l
+SELECT 
+	l.*, u.display_name AS display_name, dl.access_key 
+FROM 
+	logs l
 JOIN
-users u
+	users u
 ON
-u.id=l.user_id
-WHERE "display_name" ilike '%{{data_table.searchText || appsmith.URL.queryParams.display_name || ''}}%'
-ORDER BY "{{data_table.sortOrder.column || 'created_at'}}" {{data_table.sortOrder.order || 'DESC'}}
-LIMIT {{data_table.pageSize}}
-OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};
+	u.id = l.user_id
+LEFT JOIN
+	dify_logs dl 
+ON
+	l.message_id = dl.message_id
+WHERE 
+	"display_name" ilike '%{{data_table.searchText || appsmith.URL.queryParams.display_name || ''}}%'
+ORDER BY 
+	"{{data_table.sortOrder.column || 'created_at'}}" {{data_table.sortOrder.order || 'DESC'}}
+LIMIT 
+	{{data_table.pageSize}}
+OFFSET 
+	{{(data_table.pageNo - 1) * data_table.pageSize}};

@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT l.*,u.display_name as display_name FROM logs l\nJOIN\nusers u\nON\nu.id=l.user_id\nWHERE \"display_name\" ilike '%{{data_table.searchText || appsmith.URL.queryParams.display_name || ''}}%'\nORDER BY \"{{data_table.sortOrder.column || 'created_at'}}\" {{data_table.sortOrder.order || 'DESC'}}\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};",
+      "body": "SELECT \n\tl.*, u.display_name AS display_name, dl.access_key \nFROM \n\tlogs l\nJOIN\n\tusers u\nON\n\tu.id = l.user_id\nLEFT JOIN\n\tdify_logs dl \nON\n\tl.message_id = dl.message_id\nWHERE \n\t\"display_name\" ilike '%{{data_table.searchText || appsmith.URL.queryParams.display_name || ''}}%'\nORDER BY \n\t\"{{data_table.sortOrder.column || 'created_at'}}\" {{data_table.sortOrder.order || 'DESC'}}\nLIMIT \n\t{{data_table.pageSize}}\nOFFSET \n\t{{(data_table.pageNo - 1) * data_table.pageSize}};",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
