@@ -27,7 +27,7 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": true,
+    "executeOnLoad": false,
     "name": "total_workflow_active_user_num",
     "pageId": "应用详情",
     "userSetOnLoad": false

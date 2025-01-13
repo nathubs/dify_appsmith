@@ -27,7 +27,7 @@
         "key": "body"
       }
     ],
-    "executeOnLoad": true,
+    "executeOnLoad": false,
     "name": "total_message_num",
     "pageId": "应用详情",
     "userSetOnLoad": false
