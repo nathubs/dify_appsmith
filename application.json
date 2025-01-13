@@ -57,6 +57,10 @@
     {
       "id": "应用详情",
       "isDefault": false
+    },
+    {
+      "id": "模型价格",
+      "isDefault": false
     }
   ],
   "unpublishedAppLayout": {
